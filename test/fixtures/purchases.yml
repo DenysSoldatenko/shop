@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  date: 2023-05-09 22:04:45
+  price: 9.99
+
+two:
+  quantity: 1
+  date: 2023-05-09 22:04:45
+  price: 9.99

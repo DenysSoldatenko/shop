@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :discounts
+  resources :purchases
+  resources :products
 
   get 'users/index', to: 'users#index', as: 'account_path'
 
