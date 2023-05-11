@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This is the ApplicationController class
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 

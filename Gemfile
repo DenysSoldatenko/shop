@@ -16,6 +16,7 @@ gem 'mysql2', '~> 0.5'
 
 # Gems for project
 gem 'devise'
+gem 'faker'
 gem 'rubocop'
 gem 'rubocop-rails'
 
