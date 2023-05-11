@@ -1,14 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light ">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="">
+    <a class="navbar-brand d-flex align-items-center" href="/">
       <%= image_tag "icon.svg", height: 50, width: 50, class: "d-inline-block align-text-top me-3"%>
       <span style="font-size: 30px" >KitchenShop</span>
     </a>
-    <div>Пошук</div>
     <div>
-      <a>Іконка юзера</a>
-      <a>Іконка сподобалось</a>
-      <a>Іконка корзини</a>
+      <%= form_tag products_path, method: "get",  class: "d-flex" do %>
+        <%= text_field_tag :search, params[:search], class: "form-control me-3", placeholder: "Я шукаю..." %>
+        <%= submit_tag "Пошук", class: "btn btn-secondary" %>
+      <% end %>
+    </div>
+    <div>
+      <a><%= image_tag "user_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
+      <a><%= image_tag "heart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
+      <a><%= image_tag "shopping_cart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
     </div>
   </div>
 </nav>

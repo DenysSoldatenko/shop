@@ -9,45 +9,25 @@
     <% end %>
   </nav>
   <div class="bg-primary" style="width: 80%">
-    Товари
-    <div class="row bg-info mt-2" style="margin: auto;">
+    <%i = 0 %>
+    <%@products.each do |product| %>
+      <%if i%4==0 && i!=0 %>
+        </div>
+      <%end %>
+      <%if i%4==0 %>
+        <div class="row bg-info mt-2" style="margin: auto;">
+      <%end %>
       <div class="col-3">
         <div class="card bg-danger">
           <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
           <div class="card-body">
-            <h3 class="card-title">Назва продукту (клікабельна)</h3>
-            <h5 class="card-text">Ціна продукту</h5>
+            <h3 class="card-title"><%=link_to product.name, product_path(product.id) %></h3>
+            <h5 class="card-text"><%=product.price %></h5>
           </div>
         </div>
       </div>
-      <div class="col-3">
-        <div class="card bg-danger">
-          <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-          <div class="card-body">
-            <h3 class="card-title">Назва продукту (клікабельна)</h3>
-            <h5 class="card-text">Ціна продукту</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card bg-danger">
-          <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-          <div class="card-body">
-            <h3 class="card-title">Назва продукту (клікабельна)</h3>
-            <h5 class="card-text">Ціна продукту</h5>
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="card bg-danger">
-          <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-          <div class="card-body">
-            <h3 class="card-title">Назва продукту (клікабельна)</h3>
-            <h5 class="card-text">Ціна продукту</h5>
-          </div>
-        </div>
-      </div>
-    </div>
+      <%i+=1 %>
+    <% end %>
   </div>
 </div>
 </div>

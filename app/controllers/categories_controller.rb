@@ -9,6 +9,15 @@ class CategoriesController < ApplicationController
   # GET /categories/1 or /categories/1.json
   def show
     @children = @category.descendants
+    @products = []
+    @children.each do |category|
+      category.products.each do |product|
+        @products.push(product) unless @products.include?(product)
+      end
+    end
+    @category.products.each do |product|
+      @products.push(product) unless @products.include?(product)
+    end
   end
 
   # GET /categories/new
