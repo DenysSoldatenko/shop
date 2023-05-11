@@ -1,0 +1,94 @@
+<body>
+<%= render "shared/navbar" %>
+<div class="wrapper d-flex align-items-stretch vh-100">
+    <nav class="bg-danger d-flex flex-column" style="width: 20%">
+      Категорії
+      <% @categories.each do |category| %>
+        <a><%= category.name %></a>
+      <% end %>
+    </nav>
+    <div class="bg-primary" style="width: 80%">
+      Товари
+      <div class="row bg-info mt-2" style="margin: auto;">
+        <h3>Назва (наприклад, Товари зі знижкою)</h3>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row bg-info mt-4" style="margin: auto;">
+        <h3>Назва (наприклад, Товари зі знижкою)</h3>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="card bg-danger">
+            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+            <div class="card-body">
+              <h3 class="card-title">Назва продукту (клікабельна)</h3>
+              <h5 class="card-text">Ціна продукту</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
