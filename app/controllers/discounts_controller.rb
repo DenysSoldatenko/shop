@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# This is the DiscountsController class
 class DiscountsController < ApplicationController
-  before_action :set_discount, only: %i[ show edit update destroy ]
+  before_action :set_discount, only: %i[show edit update destroy]
 
   # GET /discounts or /discounts.json
   def index
@@ -7,8 +10,7 @@ class DiscountsController < ApplicationController
   end
 
   # GET /discounts/1 or /discounts/1.json
-  def show
-  end
+  def show; end
 
   # GET /discounts/new
   def new
@@ -16,8 +18,7 @@ class DiscountsController < ApplicationController
   end
 
   # GET /discounts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /discounts or /discounts.json
   def create
@@ -25,7 +26,7 @@ class DiscountsController < ApplicationController
 
     respond_to do |format|
       if @discount.save
-        format.html { redirect_to discount_url(@discount), notice: "Discount was successfully created." }
+        format.html { redirect_to discount_url(@discount), notice: 'Discount was successfully created.' }
         format.json { render :show, status: :created, location: @discount }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class DiscountsController < ApplicationController
   def update
     respond_to do |format|
       if @discount.update(discount_params)
-        format.html { redirect_to discount_url(@discount), notice: "Discount was successfully updated." }
+        format.html { redirect_to discount_url(@discount), notice: 'Discount was successfully updated.' }
         format.json { render :show, status: :ok, location: @discount }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +53,20 @@ class DiscountsController < ApplicationController
     @discount.destroy
 
     respond_to do |format|
-      format.html { redirect_to discounts_url, notice: "Discount was successfully destroyed." }
+      format.html { redirect_to discounts_url, notice: 'Discount was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_discount
-      @discount = Discount.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def discount_params
-      params.fetch(:discount, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_discount
+    @discount = Discount.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def discount_params
+    params.fetch(:discount, {})
+  end
 end
