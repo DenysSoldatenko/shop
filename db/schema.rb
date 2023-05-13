@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -34,57 +36,58 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_13_194849) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "carts_products", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "cart_id", null: false
-    t.bigint "product_id", null: false
-    t.integer "quantity", default: 1, null: false
-    t.index ["cart_id"], name: "index_carts_products_on_cart_id"
-    t.index ["product_id"], name: "index_carts_products_on_product_id"
+  create_table 'carts_products', id: false, charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.bigint 'cart_id', null: false
+    t.bigint 'product_id', null: false
+    t.integer 'quantity', default: 1, null: false
+    t.index ['cart_id'], name: 'index_carts_products_on_cart_id'
+    t.index ['product_id'], name: 'index_carts_products_on_product_id'
   end
 
-  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "parent_id"
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["parent_id"], name: "fk_rails_82f48f7407"
+  create_table 'categories', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.bigint 'parent_id'
+    t.string 'name'
+    t.text 'description'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['parent_id'], name: 'fk_rails_82f48f7407'
   end
 
-  create_table "categories_products", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "category_id", null: false
-    t.bigint "product_id", null: false
-    t.index ["category_id"], name: "index_categories_products_on_category_id"
-    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  create_table 'categories_products', id: false, charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci',
+                                      force: :cascade do |t|
+    t.bigint 'category_id', null: false
+    t.bigint 'product_id', null: false
+    t.index ['category_id'], name: 'index_categories_products_on_category_id'
+    t.index ['product_id'], name: 'index_categories_products_on_product_id'
   end
 
-  create_table "discounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.decimal "percent", precision: 10, scale: 2
-    t.date "start_date"
-    t.date "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_discounts_on_product_id"
+  create_table 'discounts', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.bigint 'product_id', null: false
+    t.decimal 'percent', precision: 10, scale: 2
+    t.date 'start_date'
+    t.date 'end_date'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['product_id'], name: 'index_discounts_on_product_id'
   end
 
-  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description"
-    t.decimal "price", precision: 10, scale: 2
-    t.integer "quantity", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'products', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.string 'name', null: false
+    t.text 'description'
+    t.decimal 'price', precision: 10, scale: 2
+    t.integer 'quantity', default: 0
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "purchases", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "quantity"
-    t.datetime "date"
-    t.decimal "price", precision: 10, scale: 2
-    t.bigint "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_purchases_on_product_id"
+  create_table 'purchases', charset: 'utf8mb4', collation: 'utf8mb4_0900_ai_ci', force: :cascade do |t|
+    t.integer 'quantity'
+    t.datetime 'date'
+    t.decimal 'price', precision: 10, scale: 2
+    t.bigint 'product_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['product_id'], name: 'index_purchases_on_product_id'
   end
 
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -1,7 +1,8 @@
-class UsersController < ApplicationController
-  def index
+# frozen_string_literal: true
 
-  end
+# This is the UsersController class
+class UsersController < ApplicationController
+  def index; end
 
   def destroy
     sign_out(current_user)
