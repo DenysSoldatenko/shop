@@ -249,4 +249,3 @@ data.each do |item|
   category.products << product
 end
 =end
-

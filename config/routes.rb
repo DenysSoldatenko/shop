@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :reviews
+  resources :categories
   resources :discounts
   resources :purchases
   resources :products
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+
+  root 'application#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
