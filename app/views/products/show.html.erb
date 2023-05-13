@@ -1,10 +1,85 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @product %>
-
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
-
-  <%= button_to "Destroy this product", @product, method: :delete %>
+<body>
+<%= render "shared/navbar" %>
+<div class="container-fluid bg-primary g-0">
+  <div class="row bg-danger" style="margin: auto;">
+    <a class="col-1 bg-secondary">Категорії</a>
+    <span class="col-3 bg-info">Bread-crumbs</span>
+  </div>
+  <div class="row" style="margin: auto;">
+    <h3><%= @product.name %></h3>
+  </div>
+  <div class="row bg-danger align-items-center" style="margin: auto;">
+    <%= image_tag "product.jpg", class: "col-6"%>
+    <div class="col-3 bg-info d-flex flex-column align-items-center">
+      <h3><%= @product.price %> грн</h3>
+      <%if @product.quantity > 0 %>
+        <span>Є в наявності</span>
+      <% else %>
+        <span>Відсутній у наявності</span>
+      <% end %>
+      <a class="btn btn-big btn-success mt-2"><h4>Купити</h4></a>
+      <div class="row bg-secondary">
+        <a class="col"><%= image_tag "heart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
+        <span class="col">Оцінка</span>
+        <a class="col">Відгуки</a>
+      </div>
+    </div>
+  </div>
+  <div class="row bg-secondary" style="margin: auto;">
+    <h2>Опис</h2>
+    <span><%=@product.description%></span>
+  </div>
+  <div class="row bg-primary" style="margin: auto;">
+    Характеристики
+    <table class="bg-danger col-4">
+      <tr>
+        <td>Країна</td>
+        <td>Така-то</td>
+      </tr>
+      <tr>
+        <td>То-то</td>
+        <td>Таке-то</td>
+      </tr>
+    </table>
+  </div>
+  <div class="row bg-info mt-2" style="margin: auto;">
+    <h3>Вас можуть зацікавити (товари тієї ж категорії)</h3>
+    <div class="col-3">
+      <div class="card bg-danger">
+        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+        <div class="card-body">
+          <h3 class="card-title">Назва продукту (клікабельна)</h3>
+          <h5 class="card-text">Ціна продукту</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card bg-danger">
+        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+        <div class="card-body">
+          <h3 class="card-title">Назва продукту (клікабельна)</h3>
+          <h5 class="card-text">Ціна продукту</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card bg-danger">
+        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+        <div class="card-body">
+          <h3 class="card-title">Назва продукту (клікабельна)</h3>
+          <h5 class="card-text">Ціна продукту</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card bg-danger">
+        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
+        <div class="card-body">
+          <h3 class="card-title">Назва продукту (клікабельна)</h3>
+          <h5 class="card-text">Ціна продукту</h5>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+</body>

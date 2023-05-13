@@ -20,6 +20,7 @@ gem 'rubocop'
 gem 'rubocop-rails'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'faker'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
