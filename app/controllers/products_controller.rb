@@ -6,7 +6,17 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    @products = Product.all
+    if params[:search].present?
+      @products = Product.where("name LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    else
+      @products = Product.all
+    end
+    @categories = []
+    @products.each do |product|
+      product.categories.each do |category|
+        @categories.push(category) unless @categories.include?(category)
+      end
+    end
   end
 
   # GET /products/1 or /products/1.json
