@@ -41,11 +41,12 @@
           <%= form.submit "Купити", class: "btn btn-big btn-success mt-2 disabled" %>
         <% end %>
       <% end %>
-
       <div class="row bg-secondary">
-        <a class="col"><%= image_tag "heart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
-        <span class="col">Оцінка</span>
-        <a class="col">Відгуки</a>
+        <%if  WishlistProduct.find_by(product: @product, user: current_user) !=nil %>
+          <%=button_to (image_tag "heart_icon.svg"), wishlist_delete_url(id: @product.id),  class: "btn btn-danger rounded-circle", style: "height:50px;width:50px" %>
+        <%else %>
+          <%=button_to (image_tag "heart_icon.svg"), wishlist_add_url(id: @product.id),  class: "btn btn-outline-danger rounded-circle", style: "height:50px;width:50px" %>
+        <%end %>
       </div>
     </div>
   </div>

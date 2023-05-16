@@ -3,8 +3,6 @@
 Rails.application.routes.draw do
   resources :reviews
   resources :categories
-  resources :discounts
-  resources :purchases
   resources :products
   resources :carts
 
@@ -14,6 +12,9 @@ Rails.application.routes.draw do
   post 'cart/delete_product', to: 'cart#delete_product_from_cart'
   post 'cart/increase_product_quantity', to: 'cart#increase_product_quantity'
   post 'cart/decrease_product_quantity', to: 'cart#decrease_product_quantity'
+  get 'wishlist/show', to: 'wishlist_products#show'
+  post 'wishlist/add', to: 'wishlist_products#add_product_to_wishlist'
+  post 'wishlist/delete', to: 'wishlist_products#delete_product_from_wishlist'
 
   devise_scope :user do
     get '/login', to: 'devise/sessions#login'
