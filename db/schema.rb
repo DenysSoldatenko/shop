@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_145407) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_094137) do
   create_table "attributes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -114,6 +114,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_145407) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishlist_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_wishlist_products_on_product_id"
+    t.index ["user_id"], name: "index_wishlist_products_on_user_id"
+  end
+
   add_foreign_key "attributes_products", "attributes"
   add_foreign_key "attributes_products", "products"
   add_foreign_key "carts_products", "carts"
@@ -123,4 +132,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_145407) do
   add_foreign_key "purchases", "products"
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
+  add_foreign_key "wishlist_products", "products"
+  add_foreign_key "wishlist_products", "users"
 end

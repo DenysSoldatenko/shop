@@ -1,0 +1,21 @@
+<div class="row bg-danger mb-2 align-items-center">
+  <%= image_tag "product.jpg", style: 'height:100px;width:auto;', class: "col-4 bg-primary"%>
+  <div class="col-4 row bg-secondary">
+    <div class="col-8">
+      <h4><%=link_to product.name, product_url(:id => product.id)%></h4>
+      <% if Discount.find_by(product_id: product.id) !=nil %>
+        <h4><%=(product.price*(100-Discount.find_by(product_id: product.id).percent)/100).round(2) %> грн</h4>
+      <% else %>
+        <h4><%=product.price %> грн</h4>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-1 bg-info">
+    <%=form_with url: wishlist_delete_url, method: :post do |form| %>
+      <%= form.hidden_field :id, value: product.id %>
+      <%= form.button nil, class: "btn btn-big btn-danger mt-2" do %>
+        <%= image_tag "trash_icon.svg", style: 'height:30px;width:30px;'%>
+      <% end %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<body>
+<%if @wishlist.empty? %>
+  <div class="h-100 d-flex flex-column align-items-center justify-content-center">
+    <%= image_tag "heart_icon.svg", style: "height:200px;width:200px"%>
+    <h2>Список бажань порожній</h2>
+    <p class="text-muted">Але це можна виправити :)</p>
+    <a href="javascript:history.back()" class="btn btn-success">Повернутись до товарів</a>
+  </div>
+  <div class="row bg-info mt-2" style="margin: auto;">
+    <h3 class="text-center">Додайте до списку бажань</h3>
+    <%@products.each do |product|%>
+      <%= render 'products/product', product: product %>
+    <%end %>
+  </div>
+<%else %>
+  <div class="d-flex flex-column align-items-center">
+    <h1>Список бажань</h1>
+    <div>
+      <%@wishlist.each do |product| %>
+        <%= render 'products/in_wishlist', product: product %>
+      <% end %>
+    </div>
+    <div class="d-flex align-items-center">
+      <a href="javascript:history.back()" class="btn btn-outline-secondary me-2">Повернутись до товарів</a>
+    </div>
+  </div>
+<% end %>
+</body>
