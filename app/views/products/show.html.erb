@@ -3,7 +3,14 @@
 <div class="container-fluid bg-primary g-0">
   <div class="row bg-danger" style="margin: auto;">
     <a class="col-1 bg-secondary">Категорії</a>
-    <span class="col-3 bg-info">Bread-crumbs</span>
+    <span class="col bg-info"><%=link_to "Головна", root_path%>>
+      <%@breadcrumbs.reverse_each do |crumb|%>
+        <%if crumb!=nil %>
+          <%= link_to crumb.name, category_path(id: crumb.id) %>>
+        <%end %>
+      <% end %>
+      <%= @product.name %>
+    </span>
   </div>
   <div class="row" style="margin: auto;">
     <h3><%= @product.name %></h3>
@@ -11,13 +18,30 @@
   <div class="row bg-danger align-items-center" style="margin: auto;">
     <%= image_tag "product.jpg", class: "col-6"%>
     <div class="col-3 bg-info d-flex flex-column align-items-center">
-      <h3><%= @product.price %> грн</h3>
+      <div class="bg-primary text-center">
+        <% if Discount.find_by(product_id: @product.id) !=nil %>
+          <h5 style="height: 20px"><s><%=@product.price %> грн</s></h5>
+          <h3 class="text-danger"><%=(@product.price*(100-Discount.find_by(product_id: @product.id).percent)/100).round(2) %> грн</h3>
+        <% else %>
+          <h5 style="height: 20px"></h5>
+          <h3><%=@product.price %> грн</h3>
+        <% end %>
+      </div>
+
       <%if @product.quantity > 0 %>
         <span>Є в наявності</span>
+        <%=form_with url: cart_add_product_url, method: :post do |form| %>
+          <%= form.hidden_field :product_id, value: @product.id %>
+          <%= form.submit "Купити", class: "btn btn-big btn-success mt-2" %>
+        <% end %>
       <% else %>
         <span>Відсутній у наявності</span>
+        <%=form_with url: cart_add_product_url, method: :post do |form| %>
+          <%= form.hidden_field :product_id, value: @product.id %>
+          <%= form.submit "Купити", class: "btn btn-big btn-success mt-2 disabled" %>
+        <% end %>
       <% end %>
-      <a class="btn btn-big btn-success mt-2"><h4>Купити</h4></a>
+
       <div class="row bg-secondary">
         <a class="col"><%= image_tag "heart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
         <span class="col">Оцінка</span>
@@ -43,43 +67,10 @@
     </table>
   </div>
   <div class="row bg-info mt-2" style="margin: auto;">
-    <h3>Вас можуть зацікавити (товари тієї ж категорії)</h3>
-    <div class="col-3">
-      <div class="card bg-danger">
-        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-        <div class="card-body">
-          <h3 class="card-title">Назва продукту (клікабельна)</h3>
-          <h5 class="card-text">Ціна продукту</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card bg-danger">
-        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-        <div class="card-body">
-          <h3 class="card-title">Назва продукту (клікабельна)</h3>
-          <h5 class="card-text">Ціна продукту</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card bg-danger">
-        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-        <div class="card-body">
-          <h3 class="card-title">Назва продукту (клікабельна)</h3>
-          <h5 class="card-text">Ціна продукту</h5>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card bg-danger">
-        <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-        <div class="card-body">
-          <h3 class="card-title">Назва продукту (клікабельна)</h3>
-          <h5 class="card-text">Ціна продукту</h5>
-        </div>
-      </div>
-    </div>
+    <h3>Вас можуть зацікавити</h3>
+    <%@products.each do |product|%>
+      <%=render 'products/product', product: product %>
+    <% end %>
   </div>
 </div>
 </body>

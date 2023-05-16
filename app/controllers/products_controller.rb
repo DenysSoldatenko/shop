@@ -20,7 +20,14 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1 or /products/1.json
-  def show; end
+  def show
+    @breadcrumbs = @product.categories.first.ancestors
+    @products = []
+    while @products.length<5
+      temp = Product.all.sample
+      @products << temp unless @products.include?(temp)
+    end
+  end
 
   # GET /products/new
   def new

@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   resources :discounts
   resources :purchases
   resources :products
+  resources :carts
 
   get 'users/index', to: 'users#index', as: 'account_path'
+  get 'cart/show', to: 'cart#show'
+  post 'cart/add_product', to: 'cart#add_product_to_cart'
+  post 'cart/delete_product', to: 'cart#delete_product_from_cart'
+  post 'cart/increase_product_quantity', to: 'cart#increase_product_quantity'
+  post 'cart/decrease_product_quantity', to: 'cart#decrease_product_quantity'
 
   devise_scope :user do
     get '/login', to: 'devise/sessions#login'
@@ -18,9 +24,4 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'application#index'
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

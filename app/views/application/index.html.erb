@@ -9,84 +9,23 @@
     </nav>
     <div class="bg-primary" style="width: 80%">
       Товари
-      <div class="row bg-info mt-2" style="margin: auto;">
-        <h3>Назва (наприклад, Товари зі знижкою)</h3>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
+      <%category = @categories.sample %>
+      <h3><%=category.name%></h3>
+      <div class="row bg-info mt-2 row-cols-4" style="margin: auto;">
+        <%category.get_all_children_products.first(4).each do |product| %>
+          <%= render 'products/product', product: product %>
+        <% end %>
         </div>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
+      <%category = @categories.sample %>
+      <h3><%=category.name%></h3>
+       <div class="row bg-info mt-2 row-cols-4" style="margin: auto;">
+        <%category.get_all_children_products.first(4).each do |product| %>
+          <%= render 'products/product', product: product %>
+        <% end %>
       </div>
-      <div class="row bg-info mt-4" style="margin: auto;">
-        <h3>Назва (наприклад, Товари зі знижкою)</h3>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card bg-danger">
-            <%= image_tag "product.jpg", style: 'height:100%;width:auto;', class: "card-img-top "%>
-            <div class="card-body">
-              <h3 class="card-title">Назва продукту (клікабельна)</h3>
-              <h5 class="card-text">Ціна продукту</h5>
-            </div>
-          </div>
-        </div>
       </div>
+
+</div>
     </div>
   </div>
 </div>

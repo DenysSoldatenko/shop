@@ -10,7 +10,7 @@
 
 # Додавання 30 продуктів
 
-=begin
+
 kastruly_p = Product.create([{ name: "Каструля з кришкою 'Майстерня Смаку'",
                                description: 'Ця каструля з нержавіючої сталі має велику місткість і дуже зручна для приготування різних страв.',
                                price: 549.99,
@@ -159,22 +159,20 @@ kelyhy_p = Product.create([{ name: "Келихи для вина 'Винна г�
                              description: 'Ці келихи створені спеціально для правильної подачі та насолоди від шампанського.',
                              price: 89.99,
                              quantity: 40 }])
-=end
-
 # Додавання 5 знижок
 
-# 5.times do
-#   Discount.create(
-#     product_id: rand(1..10),
-#     percent: rand(5..30),
-#     start_date: Faker::Date.between(from: 6.months.ago.to_s, to: Date.today),
-#     end_date: Faker::Date.between(from: Date.tomorrow, to: 6.months.from_now.to_s)
-#   )
-# end
+5.times do
+  Discount.create(
+    product_id: rand(1..10),
+    percent: rand(5..30),
+    start_date: Faker::Date.between(from: 6.months.ago.to_s, to: Date.today),
+    end_date: Faker::Date.between(from: Date.tomorrow, to: 6.months.from_now.to_s)
+  )
+end
 
 # Додавання категорій та підкатегорій
 
-=begin
+
 # Посуд
 posud = Category.create(name: "Посуд", parent_id: nil, description: "Все необхідне для приготування їжі")
   # Каструлі
@@ -224,11 +222,11 @@ aksesuary = Category.create(name: "Аксесуари для кухні", parent
 
 # Келихи і фужери
 kelih = Category.create(name: "Келихи і фужери", parent_id: nil, description: "Різні види склянок для напоїв")
-=end
 
 # Додавання в categories_products
+#
 
-=begin
+
 categories = {
   "Каструлі" => kastruly_p,
   "Каструлі скороварки" => kastruly_skorovarky_p,
@@ -255,4 +253,3 @@ categories.each do |category_name, products|
     product.categories.append(category)
   end
 end
-=end
