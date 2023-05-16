@@ -11,9 +11,10 @@
       <% end %>
     </div>
     <div>
-      <a><%= image_tag "user_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
-      <a><%= image_tag "heart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
-      <a><%= image_tag "shopping_cart_icon.svg", height: 30, width: 30, class: "d-inline-block align-text-top me-3"%></a>
+      <a><%= image_tag "user_icon.svg", height: 50, width: 50, class: "btn btn-outline-secondary rounded-circle"%></a>
+      <a><%= image_tag "heart_icon.svg", height: 50, width: 50, class: "btn btn-outline-danger rounded-circle"%></a>
+      <%=link_to (image_tag "shopping_cart_icon.svg", class: "btn btn-outline-secondary rounded-circle", style: "height:50px;width:50px"), cart_show_url%>
     </div>
   </div>
 </nav>
+

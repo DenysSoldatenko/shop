@@ -1,4 +1,28 @@
-<div id="<%= dom_id product %>">
-  <h1><%= product.name %></h1>
-  <h1><%= product.id %></h1>
+<div class="col d-flex align-items-stretch">
+  <div class="card bg-danger w-100">
+    <%= image_tag "product.jpg", style: 'height:150px;width:auto;', class: "card-img-top "%>
+    <div class="card-body">
+      <div class="card-title text-wrap bg-secondary", style="height: 75px;">
+        <h4 style=" -webkit-line-clamp: 2;
+            overflow : hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;"><%=link_to product.name, product_path(product.id), class: ""%></h4>
+      </div>
+      <div class="card-text bg-info">
+        <% if Discount.find_by(product_id: product.id) !=nil %>
+          <h6 style="height: 20px"><s><%=product.price %> грн</s></h6>
+          <h5 class="text-danger"><%=(product.price*(100-Discount.find_by(product_id: product.id).percent)/100).round(2) %> грн</h5>
+        <% else %>
+          <h6 style="height: 20px"></h6>
+          <h5><%=product.price %> грн</h5>
+        <% end %>
+        <p style="height: 20px">
+          <%if product.quantity == 0 %>
+          <span class="text-muted">Немає в наявності</span>
+          <%end %>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
