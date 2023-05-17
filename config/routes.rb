@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   resources :carts
 
   get 'users/index', to: 'users#index', as: 'account_path'
+  get 'users/settings', to: 'users#settings', as: 'settings_path'
+  get 'users/info', to: 'users#info', as: 'info_path'
+  get 'users/info_change', to: 'users#info_change', as: 'info_change'
+  put 'users/update_info', to: 'users#info_update', as: 'info_update'
+
   get 'cart/show', to: 'cart#show'
   post 'cart/add_product', to: 'cart#add_product_to_cart'
   post 'cart/delete_product', to: 'cart#delete_product_from_cart'
