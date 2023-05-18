@@ -1,16 +1,6 @@
-# frozen_string_literal: true
-
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
 # Додавання 30 продуктів
 
-=begin
+ 
 kastruly_p = Product.create([{ name: "Каструля з кришкою 'Майстерня Смаку'",
                                description: 'Ця каструля з нержавіючої сталі має велику місткість і дуже зручна для приготування різних страв.',
                                price: 549.99,
@@ -151,19 +141,19 @@ kelyhy_p = Product.create([{ name: "Келихи для вина 'Винна г�
                              quantity: 40 }])
 # Додавання 5 знижок
 
-=begin
+ 
 5.times do
   Discount.create(
-    product_id: rand(1..10),
+    product_id: Product.all.sample.id,
     percent: rand(5..30),
     start_date: Faker::Date.between(from: 6.months.ago.to_s, to: Date.today),
     end_date: Faker::Date.between(from: Date.tomorrow, to: 6.months.from_now.to_s)
   )
 end
-=end
+ 
 
 # Додавання категорій та підкатегорій
-=begin
+ 
 # Посуд
 posud = Category.create(name: "Посуд", parent_id: nil, description: "Все необхідне для приготування їжі")
   # Каструлі
@@ -215,7 +205,7 @@ aksesuary = Category.create(name: "Аксесуари для кухні", parent
 kelih = Category.create(name: "Келихи і фужери", parent_id: nil, description: "Різні види склянок для напоїв")
 
 # Додавання в categories_products
-=begin
+ 
 categories = {
   "Каструлі" => kastruly_p,
   "Каструлі скороварки" => kastruly_skorovarky_p,
@@ -242,19 +232,19 @@ categories.each do |category_name, products|
     product.categories.append(category)
   end
 end
-=end
+ 
 
 # Додавання характеристик
-=begin
+ 
 attributes_names = ["Виробник", "Матеріал", "Місткість", "Довжина леза",
                     "Гарантія", "Розміри", "Вага"]
 attributes_names.each do |name|
   Attribute.create(name: name)
 end
-=end
+ 
 
 # Додавання характеристик_продуктів
-=begin
+ 
 data = [
   "Каструля з кришкою 'Майстерня Смаку'",
   "Каструля-скороварка 'Скоринка'",
@@ -532,12 +522,11 @@ data.each_with_index do |data_name, index|
 
     AttributesProduct.create!(attribute_id: attrib.id, product_id: prod.id, value: value)
   end
-  puts index + 1
 end
-=end
+ 
 
 # Додавання юзерів
-=begin
+ 
 require 'faker'
 Faker::Config.locale = 'uk'
 100.times do
@@ -555,10 +544,10 @@ Faker::Config.locale = 'uk'
   )
   user.save!
 end
-=end
+ 
 
 # Додавання відгуків
-=begin
+ 
 reviews = {
   "Каструля з кришкою 'Майстерня Смаку'" => [ "Я дуже задоволена своєю новою каструлею 'Майстерня Смаку'. Вона має високу якість виготовлення та ідеально підходить для приготування їжі на газовій плиті.",
                                               "Це найкраща каструля, яку я коли-небудь купував. Вона дуже легка та проста у використанні, а також має надійну кришку, щоб запобігти витоку пари.",
@@ -631,8 +620,8 @@ reviews.each do |prod, data|
   product = Product.find_by(name: prod)
   data.each do |x|
     rating = (rat > 15) ? rand(0..3) : rand(4..5)
-    Review.create!(user_id: rand(0..99), product_id: product.id, rating: rating, comment: x)
+    Review.create!(user_id: User.all.sample.id, product_id: product.id, rating: rating, comment: x)
   end
   rat += 1
 end
-=end
+ 

@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Reviews</h1>
-
-<div id="reviews">
-  <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
-  <% end %>
+<%=render 'shared/navbar' %>
+<h2>Відгуки покупців про <%=@product.name %></h2>
+<div class="container-fluid bg-danger" style="padding-right: 0px;padding-left: 0px;">
+  <div class="row bg-info mt-2">
+    <div class="col-9">
+      <%if @current_user_review!= nil %>
+        <%=render 'review', review: @current_user_review %>
+      <%else %>
+        <%= render 'form', review: Review.new, product_id: @product.id %>
+      <%end %>
+      <%@reviews.each do |review| %>
+        <%=render 'review', review: review unless review == @current_user_review %>
+      <% end %>
+    </div>
+    <div class="sticky-top col-3 bg-success">
+      <%=render 'products/product', product: @product %>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New review", new_review_path %>

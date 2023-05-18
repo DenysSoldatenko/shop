@@ -41,12 +41,13 @@
           <%= form.submit "Купити", class: "btn btn-big btn-success mt-2 disabled" %>
         <% end %>
       <% end %>
-      <div class="row bg-secondary">
+      <div class="row bg-primary">
         <%if  WishlistProduct.find_by(product: @product, user: current_user) !=nil %>
-          <%=button_to (image_tag "heart_icon.svg"), wishlist_delete_url(id: @product.id),  class: "btn btn-danger rounded-circle", style: "height:50px;width:50px" %>
+          <%=button_to (image_tag "heart_icon.svg"), wishlist_delete_url(id: @product.id),  class: "btn btn-danger rounded-circle col", style: "height:50px;width:50px" %>
         <%else %>
-          <%=button_to (image_tag "heart_icon.svg"), wishlist_add_url(id: @product.id),  class: "btn btn-outline-danger rounded-circle", style: "height:50px;width:50px" %>
+          <%=button_to (image_tag "heart_icon.svg"), wishlist_add_url(id: @product.id),  class: "btn btn-outline-danger rounded-circle col", style: "height:50px;width:50px" %>
         <%end %>
+        <%=link_to (image_tag "review_icon.svg"), product_reviews_url(product_id: @product.id),  class: "btn btn-outline-secondary rounded-circle col", style: "height:50px;width:50px"%>
       </div>
     </div>
   </div>
