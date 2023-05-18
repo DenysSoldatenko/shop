@@ -65,6 +65,10 @@
       input[type="submit"]:hover {
           background-color: #1ed760;
       }
+      .error-message {
+          color: red;
+          font-size: 18px;
+      }
   </style>
 </head>
 <body>
@@ -74,36 +78,61 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :name, "Ім'я" %><br />
+    <%= f.label :name, "Ім'я" %>
     <%= f.text_field :name %>
+    <% if @user.errors.has_key?(:name) %>
+      <div class="error-message">
+        <%= @user.errors[:name].first %>
+      </div>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :surname, "Прізвище" %><br />
+    <%= f.label :surname, "Прізвище" %>
     <%= f.text_field :surname %>
+    <% if @user.errors.has_key?(:surname) %>
+      <div class="error-message">
+        <%= @user.errors[:surname].first %>
+      </div>
+    <% end %>
   </div>
 
   <div class="field">
-    <%= f.label :email , "Пошта" %><br />
+    <%= f.label :surname, "По-батькові" %>
+    <%= f.text_field :patronymic %>
+    <% if @user.errors.has_key?(:patronymic) %>
+      <div class="error-message">
+        <%= @user.errors[:patronymic].first %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email , "Пошта" %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% if @user.errors.has_key?(:email) %>
+      <div class="error-message">
+        <%= @user.errors[:email].first %>
+      </div>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :password , "Пароль" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> символів мінімум)</em>
-    <% end %><br /><br />
+    <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Повторіть пароль" %><br />
+    <%= f.label :password_confirmation, "Повторіть пароль" %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
     <%= f.submit "Зареєструватися" %>
-    <%= link_to "Увійти", session_path(resource_name) %>
+    <%= link_to "До сторінки входу", session_path(resource_name) %>
   </div>
 <% end %>
 

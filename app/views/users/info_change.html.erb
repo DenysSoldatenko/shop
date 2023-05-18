@@ -65,25 +65,49 @@
       input[type="submit"]:hover {
           background-color: #1ed760;
       }
+      .error-message {
+          color: red;
+          font-size: 18px;
+      }
   </style>
 </head>
 <body>
 <h2>Зміна додаткової інформації</h2>
 <%= form_for(@user, url: info_update_path(@user), method: :put) do |f| %>
+  <% if flash[:alert] %>
+    <div class="error-message" style="background-color: red; color: white; padding: 10px;">
+      <%= flash[:alert] %><br />
+    </div>
+  <% end %>
   <form>
     <div class="field">
       <%= f.label :name, "Ім'я" %><br />
       <%= f.text_field :name %>
+      <% if @user.errors.has_key?(:name) %>
+        <div class="error-message">
+          <%= @user.errors[:name].first %>
+        </div>
+      <% end %>
     </div>
 
     <div class="field">
       <%= f.label :surname, "Прізвище" %><br />
       <%= f.text_field :surname %>
+      <% if @user.errors.has_key?(:surname) %>
+        <div class="error-message">
+          <%= @user.errors[:surname].first %>
+        </div>
+      <% end %>
     </div>
 
     <div class="field">
       <%= f.label :surname, "По-батькові" %><br />
       <%= f.text_field :patronymic %>
+      <% if @user.errors.has_key?(:patronymic) %>
+        <div class="error-message">
+          <%= @user.errors[:patronymic].first %>
+        </div>
+      <% end %>
     </div>
 
     <div class="actions">
