@@ -11,24 +11,19 @@ class Category < ApplicationRecord
   end
 
   def get_all_children_products
-    children = self.descendants
-    products = []
-    children.each do |category|
-      category.products.each do |product|
-        products.push(product) unless products.include?(product)
-      end
-    end
-    self.products.each do |product|
-      products.push(product) unless products.include?(product)
-    end
-    return products
+    Product.joins(:categories).merge(Category.where(id: self.id)) | Product.joins(:categories).merge(Category.where(id: self.descendants.map(&:id)))
   end
 
   def ancestors
     if self.parent == nil
       return
+    else
+      ancestors = self.parent.ancestors
+      if ancestors == nil
+        return [self, self.parent].flatten
+      else
+        return [self, self.parent].flatten & ancestors.flatten
+      end
     end
-    return [self, self.parent, self.parent.ancestors].flatten
   end
-
 end

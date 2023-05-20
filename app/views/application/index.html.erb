@@ -1,33 +1,20 @@
 <body>
 <%= render "shared/navbar" %>
-<div class="wrapper d-flex align-items-stretch vh-100">
-    <nav class="bg-danger d-flex flex-column align-items-center" style="width: 20%">
-      Категорії
-      <% @categories.each do |category| %>
-        <%= link_to category.name, "categories/#{category.id}", style: "font-size: 25px;"%>
-      <% end %>
-    </nav>
-    <div class="bg-primary" style="width: 80%">
-      Товари
-      <%category = @categories.sample %>
-      <h3><%=category.name%></h3>
-      <div class="row bg-info mt-2 row-cols-4" style="margin: auto;">
-        <%category.get_all_children_products.first(4).each do |product| %>
-          <%= render 'products/product', product: product %>
-        <% end %>
-        </div>
-      <%category = @categories.sample %>
-      <h3><%=category.name%></h3>
-       <div class="row bg-info mt-2 row-cols-4" style="margin: auto;">
-        <%category.get_all_children_products.first(4).each do |product| %>
+<div class="wrapper d-flex align-items-stretch">
+  <nav class="d-flex flex-column align-items-left border-end mt-3 border-3" style="width: 20%">
+    <% @categories.each do |category| %>
+      <%= link_to category.name, "categories/#{category.id}", class: "ms-4", style: "font-size: 20px; text-decoration:none;"%>
+    <% end %>
+  </nav>
+  <div style="width: 80%">
+    <%@categories.each do |category| %>
+      <h3><%= link_to category.name, "categories/#{category.id}", class: "ms-3", style: "text-decoration:none;"%></h3>
+      <div class="row mt-2 row-cols-5 border-bottom border-3 gx-3" style="margin: auto; padding-bottom: 1%;">
+        <%category.get_all_children_products.first(5).each do |product| %>
           <%= render 'products/product', product: product %>
         <% end %>
       </div>
-      </div>
-
-</div>
-    </div>
+    <% end %>
   </div>
 </div>
-
 </body>

@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
   def index
     @product = Product.find_by_id(params[:product_id])
     @reviews = Review.where(product_id: params[:product_id])
-    @current_user_review = Review.find_by(user_id: current_user.id)
+    @current_user_review = Review.find_by(user_id: current_user.id) unless current_user == nil
   end
 
   # GET /reviews/1/edit

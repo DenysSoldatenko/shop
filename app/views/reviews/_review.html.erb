@@ -16,7 +16,7 @@
       </div>
       <div class="d-flex flex-column">
         <div class="text-muted text-end"><%=review.created_at.strftime("%d/%m/%Y") %></div>
-        <%if current_user.id == review.user.id %>
+        <%if current_user != nil && current_user.id == review.user.id %>
           <div class="d-flex mt-3">
             <%=link_to "Редагувати", edit_review_url(id: review.id), class: "btn btn-secondary me-3" %>
             <%=button_to "Видалити", review_url(id: review.id), method: :delete, class: "btn btn-danger" %>
