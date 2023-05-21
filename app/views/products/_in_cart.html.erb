@@ -1,31 +1,20 @@
-<div class="row bg-danger mb-2 align-items-center">
-  <%= image_tag "product.jpg", style: 'height:100px;width:auto;', class: "col-4 bg-primary"%>
-  <div class="col-4 row bg-secondary">
-    <div class="col-8">
-      <h4><%=link_to product.name, product_url(:id => product.id)%></h4>
-      <% if Discount.find_by(product_id: product.id) !=nil %>
-        <h4><%=(product.price*(100-Discount.find_by(product_id: product.id).percent)/100).round(2) %> грн</h4>
-      <% else %>
-        <h4><%=product.price %> грн</h4>
-      <% end %>
-    </div>
-    <div class="col-8">
-      <%=form_with url: cart_increase_product_quantity_url, method: :post, class: "d-flex gap-2 align-items-center" do |form| %>
-        <%= form.hidden_field :product_id, value: product.id %>
-        <%if carts_product.quantity == 1 %>
-          <%= form.submit "-", class: "btn btn-big btn-danger mt-2 disabled", formaction: cart_decrease_product_quantity_url %>
-        <% else %>
-          <%= form.submit "-", class: "btn btn-big btn-danger mt-2", formaction: cart_decrease_product_quantity_url %>
-        <% end %>
-        <%= form.number_field :quantity, value: carts_product.quantity, class: "form-control", style: "width: 100px;" %>
-        <%= form.submit "+", class: "btn btn-big btn-success mt-2" %>
-      <% end %>
-    </div>
+<div class="row mb-2 w-75 border-bottom pb-2", style="margin: auto">
+  <div class="col-4">
+    <%= image_tag "product.jpg", class: "img-fluid"%>
   </div>
-  <div class="col-1 bg-info">
-    <%=form_with url: cart_delete_product_url, method: :post do |form| %>
+  <div class="col">
+    <h4><%=link_to product.name, product_url(:id => product.id), style: "text-decoration: none"%></h4>
+    <%=form_with url: cart_increase_product_quantity_url, method: :post, class: "d-flex align-items-center" do |form| %>
+      <h4 class="me-3"><%=product.get_current_price %> грн</h4>
       <%= form.hidden_field :product_id, value: product.id %>
-      <%= form.button nil, class: "btn btn-big btn-danger mt-2" do %>
+      <%if carts_product.quantity == 1 %>
+        <%= form.submit "-", class: "btn btn-danger disabled", formaction: cart_decrease_product_quantity_url %>
+      <% else %>
+        <%= form.submit "-", class: "btn btn-danger", formaction: cart_decrease_product_quantity_url %>
+      <% end %>
+      <%= form.number_field :quantity, value: carts_product.quantity, class: "form-control ms-2 me-2", style: "width: 100px;", disabled: true %>
+      <%= form.submit "+", class: "btn btn-success" %>
+      <%= form.button nil, class: "btn btn-danger ms-auto", formaction: cart_delete_product_url do %>
         <%= image_tag "trash_icon.svg", style: 'height:30px;width:30px;'%>
       <% end %>
     <% end %>
