@@ -3,15 +3,11 @@ class CategoriesController < ApplicationController
 
   def show
     @children = @category.descendants
-    @products = []
-    @children.each do |category|
-      category.products.each do |product|
-        @products.push(product) unless @products.include?(product)
-      end
-    end
-    @category.products.each do |product|
-      @products.push(product) unless @products.include?(product)
-    end
+    @attributes = CategoryAttributeValues.call(@category, params)
+    @products = ProductFilter.call(@category.get_all_children_products, params)
+    @breadcrumbs = @category.ancestors
+    @prices = [params["price_from"], params["price_to"]]
+    @selected = params[:select]
   end
 
   private

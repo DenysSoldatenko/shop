@@ -1,60 +1,39 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: :create
 
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
-  end
-
-  # GET /reviews/1 or /reviews/1.json
-  def show
-  end
-
-  # GET /reviews/new
-  def new
-    @review = Review.new
+    @product = Product.find_by_id(params[:product_id])
+    @reviews = Review.where(product_id: params[:product_id])
+    @current_user_review = Review.find_by(user_id: current_user.id) unless current_user == nil
   end
 
   # GET /reviews/1/edit
   def edit
+    @product_id = @review.product_id
   end
 
   # POST /reviews or /reviews.json
   def create
     @review = Review.new(review_params)
-
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to review_url(@review), notice: "Review was successfully created." }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
+    @review.user_id = current_user.id
+    @review.save
+    redirect_to action: :index, product_id: @review.product_id
   end
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to review_url(@review), notice: "Review was successfully updated." }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
+    @review.update(review_params)
+    product_id = @review.product_id
+    redirect_to action: :index, product_id: product_id
   end
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
+    product_id = @review.product_id
     @review.destroy
-
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: "Review was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to action: :index, product_id: product_id
   end
 
   private
@@ -65,6 +44,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.fetch(:review, {})
+      params.require(:review).permit(:user_id, :product_id, :rating, :comment)
     end
 end

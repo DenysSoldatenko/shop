@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :reviews
   resources :categories
-  resources :products
+  resources :products do
+    resources :reviews
+  end
+  resources :reviews
   resources :carts
 
   get 'users/my_account', to: 'users#my_account', as: 'account_path'

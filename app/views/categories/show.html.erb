@@ -1,20 +1,61 @@
+<head>
+  <title><%=@category.name %></title>
+</head>
 <body>
-<%= render "shared/navbar" %>
-<div class="wrapper d-flex align-items-stretch vh-100">
-  <nav class="bg-danger d-flex flex-column align-items-center" style="width: 20%">
-    Категорії-наслідники і фільтри
-    <% @children.each do |category| %>
-      <%= link_to category.name, "#{category.id}", style: "font-size: 25px;"%>
-    <% end %>
+  <%= render "shared/navbar" %>
+  <div class="w-100 ps-4 pt-2"><%=link_to "Головна", root_path, style: "text-decoration:none;"%>
+  <%if @breadcrumbs != nil%>
+      <%@breadcrumbs.reverse_each do |crumb|%>
+        <%if crumb!=nil %>
+          ><%= link_to crumb.name, category_path(id: crumb.id), style: "text-decoration:none;"%>
+        <%end %>
+      <% end %>
+      <%end %>
+    <h2><%=@category.name %></h2>
+  </div>
+<div class="wrapper d-flex align-items-stretch">
+  <nav class="d-flex flex-column border-end border-3" style="width: 20%">
+    <%= form_tag category_url, method: :get, name: "filters", class: "d-flex flex-column ps-4 pe-4" do |form| %>
+      <%=select_tag(:select, options_for_select([["Спочатку дорогі", "price_desc"], ["Спочатку дешеві", "price_acs"], ["Кращий рейтинг", "rating_desc"]], @selected), :onchange => "javascript: document.filters.submit();", class: "mb-3")%>
+      <%unless @children.empty? %>
+        <div class="d-flex flex-column mb-3">
+          <% @children.each do |category| %>
+            <%= link_to category.name, "#{category.id}", style: "font-size: 20px;text-decoration:none;"%>
+          <% end %>
+        </div>
+      <%end %>
+      <div class="mb-3">
+        <h5>Ціна</h5>
+        <div class="d-flex align-items-center">
+          <%=number_field_tag "price_from", @prices[0], min: 0, step: 0.01, :onchange => "javascript: document.filters.submit();", style: "width: 35%; height: 90%" %>
+          <span class="ms-1 me-1" style="font-size: 20px;">-</span>
+          <%=number_field_tag "price_to", @prices[1], min: 0, step: 0.01, :onchange => "javascript: document.filters.submit();", style: "width: 35%; height: 90%"%>
+          <%= submit_tag "ОК", class: "btn btn-secondary ms-1" %>
+        </div>
+      </div>
+      <% @attributes.each do |attribute| %>
+        <div class="mb-3">
+          <%if !attribute[2].empty? %>
+            <h5><%= attribute[0] %></h5>
+            <%attribute[2].each_with_index do |value, index| %>
+              <div>
+                <%=check_box_tag("#{attribute[1]}[#{index}]", "#{value[0]}", value[1], :onclick => "javascript: document.filters.submit();")%>
+                <%=label_tag("#{attribute[1]}[#{index}]", "#{value[0]}")%>
+              </div>
+            <%end %>
+          <%end %>
+        </div>
+      <%end %>
+    <%end %>
   </nav>
-  <div class="bg-primary" style="width: 80%">
+  <div style="width: 80%">
     <%i = 0 %>
     <%@products.each do |product| %>
       <%if i%4==0 && i!=0 %>
         </div>
       <%end %>
       <%if i%4==0 %>
-        <div class="row bg-info mt-2 row-cols-4" style="margin: auto;">
+        <div class="row mb-2 row-cols-4" style="margin: auto;">
       <%end %>
       <%= render 'products/product', product: product %>
       <%i+=1 %>
@@ -22,5 +63,4 @@
   </div>
 </div>
 </div>
-
 </body>
