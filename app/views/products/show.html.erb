@@ -1,12 +1,12 @@
 <body>
 <%= render "shared/navbar" %>
-<div class="container-fluid bg-primary g-0">
-  <div class="row bg-danger" style="margin: auto;">
-    <span class="col bg-info"><%=link_to "Головна", root_path%>>
+<div class="ms-2">
+  <div class="row" style="margin: auto;">
+    <span class="col"><%=link_to "Головна", root_path, style: "text-decoration:none;"%>>
       <%if @breadcrumbs != nil%>
       <%@breadcrumbs.reverse_each do |crumb|%>
         <%if crumb!=nil %>
-          <%= link_to crumb.name, category_path(id: crumb.id) %>>
+          <%= link_to crumb.name, category_path(id: crumb.id), style: "text-decoration:none;" %>>
         <%end %>
       <% end %>
       <%end %>
@@ -16,58 +16,64 @@
   <div class="row" style="margin: auto;">
     <h3><%= @product.name %></h3>
   </div>
-  <div class="row bg-danger align-items-center" style="margin: auto;">
+  <div class="d-flex ms-2 mb-2 align-items-center" style="margin: auto;">
+    <div>
+      <%@product.get_rating.times do %>
+        <%=image_tag("star_yellow_icon.svg", style: "height:20px; width:20px;") %>
+      <%end %>
+      <%(5-@product.get_rating).times do %>
+        <%=image_tag("star_gray_icon.svg", style: "height:20px; width:20px;") %>
+      <%end %>
+    </div>
+    <%=link_to "Відгуки", product_reviews_url(product_id: @product.id), style: "text-decoration: none;", class: "ms-2"%>
+  </div>
+  <div class="row " style="margin: auto;">
     <%= image_tag "product.jpg", class: "col-6"%>
-    <div class="col-3 bg-info d-flex flex-column align-items-center">
-      <div class="bg-primary text-center">
-        <% if Discount.find_by(product_id: @product.id) !=nil %>
-          <h5 style="height: 20px"><s><%=@product.price %> грн</s></h5>
-          <h3 class="text-danger"><%=(@product.price*(100-Discount.find_by(product_id: @product.id).percent)/100).round(2) %> грн</h3>
-        <% else %>
-          <h5 style="height: 20px"></h5>
-          <h3><%=@product.price %> грн</h3>
-        <% end %>
-      </div>
-
-      <%if @product.quantity > 0 %>
-        <span>Є в наявності</span>
-        <%=form_with url: cart_add_product_url, method: :post do |form| %>
+    <div class="col align-items-center">
+      <div class="d-flex border rounded border-secondary pt-2 pb-2 ps-2">
+        <div class="text-center me-3">
+          <% if Discount.find_by(product_id: @product.id) !=nil %>
+            <h5 style="height: 20px"><s><%=@product.price %> ₴</s></h5>
+            <h3 class="text-danger"><%=@product.get_current_price %> ₴</h3>
+          <% else %>
+            <h5 style="height: 20px"></h5>
+            <h3><%=@product.get_current_price %> ₴</h3>
+          <% end %>
+          <%if @product.quantity > 0 %>
+            <span class="text-success">Є в наявності</span>
+          <% else %>
+            <span class="text-muted"> Немає у наявності</span>
+          <% end %>
+        </div>
+        <%=form_with url: cart_add_product_url, method: :post, class: "d-flex align-items-center" do |form| %>
           <%= form.hidden_field :product_id, value: @product.id %>
-          <%= form.submit "Купити", class: "btn btn-big btn-success mt-2" %>
+          <%if @product.quantity > 0 %>
+            <%= form.submit "Купити", class: "btn btn-lg btn-success", style: "height: 50%" %>
+          <% else %>
+            <%= form.submit "Купити", class: "btn btn-lg btn-success disabled", style: "height: 50%" %>
+          <% end %>
         <% end %>
-      <% else %>
-        <span>Відсутній у наявності</span>
-        <%=form_with url: cart_add_product_url, method: :post do |form| %>
-          <%= form.hidden_field :product_id, value: @product.id %>
-          <%= form.submit "Купити", class: "btn btn-big btn-success mt-2 disabled" %>
-        <% end %>
-      <% end %>
-      <div class="row bg-primary">
-        <%if  WishlistProduct.find_by(product: @product, user: current_user) !=nil %>
-          <%=button_to (image_tag "heart_icon.svg"), wishlist_delete_url(id: @product.id),  class: "btn btn-danger rounded-circle col", style: "height:50px;width:50px" %>
-        <%else %>
-          <%=button_to (image_tag "heart_icon.svg"), wishlist_add_url(id: @product.id),  class: "btn btn-outline-danger rounded-circle col", style: "height:50px;width:50px" %>
-        <%end %>
-        <%=link_to (image_tag "review_icon.svg"), product_reviews_url(product_id: @product.id),  class: "btn btn-outline-secondary rounded-circle col", style: "height:50px;width:50px"%>
+        <div class="ms-3 d-flex align-items-center">
+          <%if  WishlistProduct.find_by(product: @product, user: current_user) !=nil %>
+            <%=button_to (image_tag "heart_icon.svg"), wishlist_delete_url(id: @product.id),  class: "btn btn-danger rounded-circle me-3", style: "height:50px;width:50px"%>
+          <%else %>
+            <%=button_to (image_tag "heart_icon.svg"), wishlist_add_url(id: @product.id),  class: "btn btn-outline-danger rounded-circle me-3", style: "height:50px;width:50px" %>
+          <%end %>
+          <%=button_to (image_tag "review_icon.svg"), product_reviews_url(product_id: @product.id), method: :get,  class: "btn btn-outline-secondary rounded-circle", style: "height:50px;width:50px"%>
+        </div>
       </div>
+      <table class="rounded table table-striped table-hover mt-3">
+        <%@attributes.each do |key, value| %>
+          <tr>
+            <td class="fw-bold"><%=key %></td>
+            <td><%=value %></td>
+          </tr>
+        <% end %>
+      </table>
+      <p style="font-size: 20px;"><%=@product.description%></p>
     </div>
   </div>
-  <div class="row bg-secondary" style="margin: auto;">
-    <h2>Опис</h2>
-    <span><%=@product.description%></span>
-  </div>
-  <div class="row bg-primary" style="margin: auto;">
-    Характеристики
-    <table class="bg-danger col-4">
-      <%@attributes.each do |key, value| %>
-        <tr>
-          <td><%=key %></td>
-          <td><%=value %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-  <div class="row bg-info mt-2" style="margin: auto;">
+  <div class="row mt-2" style="margin: auto;">
     <h3>Вас можуть зацікавити</h3>
     <%@products.each do |product|%>
       <%=render 'products/product', product: product %>

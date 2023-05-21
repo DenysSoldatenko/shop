@@ -10,7 +10,8 @@ class Product < ApplicationRecord
 
   def get_rating
     ratings = Review.where(product_id: self.id).map(&:rating)
-    return (ratings.sum/ratings.length).round
+    return (ratings.sum/ratings.length).round unless ratings.empty?
+    return 0
   end
 
   def get_current_price

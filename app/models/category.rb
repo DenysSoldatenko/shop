@@ -16,13 +16,13 @@ class Category < ApplicationRecord
 
   def ancestors
     if self.parent == nil
-      return
+      return Array(self)
     else
       ancestors = self.parent.ancestors
       if ancestors == nil
         return [self, self.parent].flatten
       else
-        return [self, self.parent].flatten & ancestors.flatten
+        return [self, self.parent].flatten | ancestors.flatten
       end
     end
   end

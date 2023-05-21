@@ -16,9 +16,9 @@ class ProductFilter
     end
     case params[:select]
     when "price_desc"
-      products = products.sort_by{|product| product.price}.reverse
+      products = products.sort_by{|product| product.get_current_price}.reverse
     when "price_acs"
-      products = products.sort_by{|product| product.price}
+      products = products.sort_by{|product| product.get_current_price}
     when "rating_desc"
       products = products.sort_by{|product| product.get_rating}.reverse
     end

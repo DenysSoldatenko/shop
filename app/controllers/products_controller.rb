@@ -8,9 +8,7 @@ class ProductsController < ApplicationController
     @products = ProductFilter.call(Product.all, params)
     @categories = []
     @products.each do |product|
-      product.categories.each do |category|
-        @categories.push(category) unless @categories.include?(category)
-      end
+      @categories = @categories | product.categories
     end
     @prices = [params["price_from"], params["price_to"]]
     @search = params[:search]
@@ -19,11 +17,7 @@ class ProductsController < ApplicationController
 
   def show
     @breadcrumbs = @product.categories.first.ancestors
-    @products = []
-    while @products.length<5
-      temp = Product.all.sample
-      @products << temp unless @products.include?(temp)
-    end
+    @products = Product.all.shuffle.first(5)
     @attributes = {}
     Attribute.all.each do |attribute|
       @attributes[attribute.name] = AttributesProduct.find_by(attribute_id: attribute.id, product_id: @product.id).value unless AttributesProduct.find_by(attribute_id: attribute.id, product_id: @product.id).value == nil
