@@ -1,0 +1,113 @@
+.checkout-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f8f8f8;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.product-info span {
+    margin-right: 10px;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.total-amount {
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.address-section,
+.payment-section {
+    margin-bottom: 20px;
+}
+
+.submit-section {
+    text-align: center;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.checkout-container {
+    background-color: #f8f8f8;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+}
+
+h2 {
+    color: #222;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: #f9c226;
+}
+
+.btn-primary:hover {
+    background-color: #f8b517;
+}

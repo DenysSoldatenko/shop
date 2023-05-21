@@ -28,6 +28,7 @@ class CartController < ApplicationController
     if @cart.products.empty?
       @products = Product.all.shuffle.first(5)
     end
+    session[:total] = @total
   end
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Form</title>
+  <title>Інформація</title>
   <style>
       body {
           font-family: Arial, sans-serif;
@@ -65,51 +65,57 @@
       input[type="submit"]:hover {
           background-color: #1ed760;
       }
-      .alert {
-          padding: 1em;
-          margin-bottom: 1em;
-      }
-
-      .alert-danger {
-          color: #721c24;
-          background-color: #f8d7da;
-          border-color: #f5c6cb;
+      .error-message {
+          color: red;
+          font-size: 18px;
       }
   </style>
 </head>
 <body>
-<h2>Вхід</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<h2>Зміна додаткової інформації</h2>
+<%= form_for(@user, url: info_update_path(@user), method: :put) do |f| %>
   <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <%= flash[:alert] %>
+    <div class="error-message" style="background-color: red; color: white; padding: 10px;">
+      <%= flash[:alert] %><br />
     </div>
   <% end %>
   <form>
     <div class="field">
-      <%= f.label :email , "Пошта" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :name, "Ім'я" %><br />
+      <%= f.text_field :name %>
+      <% if @user.errors.has_key?(:name) %>
+        <div class="error-message">
+          <%= @user.errors[:name].first %>
+        </div>
+      <% end %>
     </div>
 
     <div class="field">
-      <%= f.label :password , "Пароль" %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <%= f.label :surname, "Прізвище" %><br />
+      <%= f.text_field :surname %>
+      <% if @user.errors.has_key?(:surname) %>
+        <div class="error-message">
+          <%= @user.errors[:surname].first %>
+        </div>
+      <% end %>
     </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.label :remember_me , "Запам'ятати мене" %> <%= f.check_box :remember_me %>
-      </div>
-    <% end %>
+    <div class="field">
+      <%= f.label :surname, "По-батькові" %><br />
+      <%= f.text_field :patronymic %>
+      <% if @user.errors.has_key?(:patronymic) %>
+        <div class="error-message">
+          <%= @user.errors[:patronymic].first %>
+        </div>
+      <% end %>
+    </div>
 
     <div class="actions">
-      <%= link_to "Зареєструватися", new_registration_path(resource_name) %>
-      <%= f.submit "Увійти" %>
-      <!----<%= link_to "Забули пароль?", new_password_path(resource_name) %>>
+      <%= f.submit "Змінити" %>
+      <%= link_to "Назад", settings_path_url%>
     </div>
-
-  </form>
 <% end %>
-<!----<%= render "devise/shared/links" %>>
+
+</form>
 </body>
 </html>

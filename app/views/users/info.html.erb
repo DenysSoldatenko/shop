@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Form</title>
+  <title>Інформація</title>
   <style>
       body {
           font-family: Arial, sans-serif;
@@ -65,51 +65,34 @@
       input[type="submit"]:hover {
           background-color: #1ed760;
       }
-      .alert {
-          padding: 1em;
-          margin-bottom: 1em;
-      }
-
-      .alert-danger {
-          color: #721c24;
-          background-color: #f8d7da;
-          border-color: #f5c6cb;
-      }
   </style>
 </head>
 <body>
-<h2>Вхід</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <% if flash[:alert] %>
-    <div class="alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
+<h2>Додавання додаткової інформації</h2>
+<%= form_for(@user, url: info_path_url) do |f| %>
   <form>
+
     <div class="field">
-      <%= f.label :email , "Пошта" %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :name, "Ім'я" %><br />
+      <%= f.text_field :name %>
     </div>
 
     <div class="field">
-      <%= f.label :password , "Пароль" %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
+      <%= f.label :surname, "Прізвище" %><br />
+      <%= f.text_field :surname %>
     </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.label :remember_me , "Запам'ятати мене" %> <%= f.check_box :remember_me %>
-      </div>
-    <% end %>
+    <div class="field">
+      <%= f.label :surname, "По-батькові" %><br />
+      <%= f.text_field :patronymic %>
+    </div>
 
     <div class="actions">
-      <%= link_to "Зареєструватися", new_registration_path(resource_name) %>
-      <%= f.submit "Увійти" %>
-      <!----<%= link_to "Забули пароль?", new_password_path(resource_name) %>>
+      <%= f.submit "Додати" %>
+      <%= link_to "Назад", settings_path_url%>
     </div>
-
-  </form>
 <% end %>
-<!----<%= render "devise/shared/links" %>>
+
+</form>
 </body>
 </html>

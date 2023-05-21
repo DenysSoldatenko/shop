@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Мої замовлення</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+      }
+
+      .center {
+          text-align: center;
+      }
+
+      .link {
+          display: block;
+          margin-bottom: 18px;
+          color: #0000FF;
+          text-decoration: none;
+          font-size: 20px;
+      }
+
+      .home-link {
+          color: #FF0000;
+          font-weight: bold;
+      }
+
+      .purchase-item {
+          margin-bottom: 10px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          background-color: #f9f9f9;
+      }
+
+      .product-name {
+          font-weight: bold;
+      }
+
+      .price {
+          color: #008000;
+      }
+
+      .quantity {
+          font-style: italic;
+      }
+  </style>
+</head>
+<body>
+<%= render "shared/navbar" %>
+<br><h2 class="center">Мої замовлення</h2><br>
+
+<% i = 0 %>
+<% previous_created_at = nil %>
+<div class="purchase-item">
+  <% if @purchases.empty? %>
+    <p>Відсутні покупки</p>
+  <% else %>
+    <% @purchases.each do |purchase| %>
+      <% current_created_at = purchase.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+      <% if previous_created_at && previous_created_at.to_datetime == current_created_at.to_datetime %>
+        <div class="purchase-item">
+          <span class="product-name">Продукт: <%= purchase.product.name %></span>
+          <span class="price">Ціна: <%= purchase.price %> грн</span>
+          <span class="quantity">Кількість: <%= purchase.quantity %>
+            <%= purchase.quantity == 1 ? 'товар' : ('2'..'4').include?(purchase.quantity.to_s[-1]) ? 'товари' : 'товарів' %></span>
+        </div>
+      <% else %>
+        <% previous_created_at = current_created_at %>
+        <% if i > 0 %>
+          </div><br><br>
+        <% end %>
+        <% i += 1 %>
+        <div class="purchase-item">
+          <h2>Замовлення <%= i %></h2>
+          <span class="product-name">Продукт: <%= purchase.product.name %></span>
+          <span class="price">Ціна: <%= purchase.price %> грн</span>
+          <span class="quantity">Кількість: <%= purchase.quantity %>
+            <%= purchase.quantity == 1 ? 'товар' : ('2'..'4').include?(purchase.quantity.to_s[-1]) ? 'товари' : 'товарів' %></span>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+
+
+
+<a href="<%= root_path %>" class="link center home-link">До головної сторінки</a>
+</body>
+</html>

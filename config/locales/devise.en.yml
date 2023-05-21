@@ -61,5 +61,39 @@ en:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "Виникла помилка (загалом - %{count}), через яку неможливо зберегти зміни."
+        other: "Виникли помилки (загалом - %{count}), через які неможливо зберегти зміни."
+  activerecord:
+    attributes:
+      user:
+        email: "Електронна пошта: "
+        password: "Пароль: "
+        password_confirmation: "Пароль: "
+        name: "Ім'я: "
+        surname: "Прізвище: "
+        patronymic: "По-батькові: "
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "не може бути порожньою"
+              invalid: "неправильний формат електронної пошти"
+              taken: "вже використовується"
+            password:
+              blank: "не може бути порожнім"
+              too_short: "занадто короткий (мінімум 6 символів)"
+            password_confirmation:
+              confirmation: "не збігаються"
+            name:
+              blank: "не може бути порожнім"
+              invalid: "не повинно містити цифр"
+              too_long: "занадто довге (максимум 25 символів)"
+            surname:
+              blank: "не може бути порожнім"
+              invalid: "не повинно містити цифр"
+              too_long: "занадто довге (максимум 25 символів)"
+            patronymic:
+              blank: "не може бути порожнім"
+              invalid: "не повинно містити цифр"
+              too_long: "занадто довге (максимум 25 символів)"

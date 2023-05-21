@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Мій профіль</title>
+  <style>
+      .center {
+          text-align: center;
+      }
+
+      .link {
+          display: block;
+          margin-bottom: 18px;
+          color: #0000FF;
+          text-decoration: none;
+          font-size: 20px;
+      }
+
+      .home-link {
+          color: #FF0000;
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+<%= render "shared/navbar" %>
+<h2 class="center">Мій профіль</h2><br>
+<a href="<%= history_path_path %>" class="link center">Історія замовлень</a>
+<a href="<%= root_path %>" class="link center home-link">До головної сторінки</a>
+</body>
+</html>

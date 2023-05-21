@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Інформація</title>
+  <style>
+      .center {
+          text-align: center;
+      }
+
+      .link {
+          display: block;
+          margin-bottom: 18px;
+          color: #0000FF;
+          text-decoration: none;
+          font-size: 20px;
+      }
+
+      .home-link {
+          color: #FF0000;
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+<%= render "shared/navbar" %>
+<h2 class="center">Налаштування</h2><br>
+<a href="<%= info_change_path(@user) %>" class="link center">Змінити ПІП</a>
+<a href="<%= email_change_path(@user) %>" class="link center">Змінити пошту</a>
+<a href="<%= password_change_path(@user) %>" class="link center">Змінити пароль</a>
+<a href="<%= root_path %>" class="link center home-link">До головної сторінки</a>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Оформлення</title>
+  <link rel="stylesheet" type="text/css" href="/assets/checkout.css">
+</head>
+<body>
+<%= render "shared/navbar" %>
+<div class="checkout-container">
+
+  <div class="address-section">
+    <h2>Замовлення</h2>
+    <% @cart.carts_products.each do |carts_product| %>
+      <% product = carts_product.product %>
+      <div class="product-info">
+        <span class="product-name">Продукт: <%= product.name %></span>
+        <span>Ціна: <%= product.price %> грн</span>
+        <span>Кількість: <%= carts_product.quantity %>
+          <%= carts_product.quantity == 1 ? 'товар'
+                : (2..4).include?(carts_product.quantity) ? 'товари' : 'товарів' %></span>
+      </div>
+    <% end %>
+    <div class="total-amount">
+      <span>Загальна сума: <%= @total %> грн</span>
+    </div><br>
+  </div>
+
+  <%= form_with(url: checkout_create_path) do |f| %>
+    <div class="address-section">
+      <% if @user_address.errors.any? %>
+        <div class="error-messages">
+          <% @user_address.errors.full_messages.each do |message| %>
+            <div class="error-message">
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <h2>1) Доставка</h2>
+      <%= fields_for @user_address do |address_form| %>
+        <div class="form-group">
+          <%= address_form.label :address, "Адреса(вул./пл./просп.  Назва, номер будинку)" %>
+          <%= address_form.text_field :address, placeholder: "вул. Миргородська, 23", class: "form-control", id: "address-input" %>
+          <% if @user_address.errors.has_key?(:address) %>
+            <div class="error-message">
+              <%= @user_address.errors[:address].first %>
+            </div>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= address_form.label :city, "Місто" %>
+          <%= address_form.text_field :city, placeholder: "Харків", class: "form-control", id: "city-input" %>
+          <% if @user_address.errors.has_key?(:city) %>
+            <div class="error-message">
+              <%= @user_address.errors[:city].first %>
+            </div>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= address_form.label :zip_code, "Поштовий код(5 цифр)" %>
+          <%= address_form.text_field :zip_code, placeholder: "57063", class: "form-control", maxlength: 5, pattern: "[0-9]{5}" %>
+          <% if @user_address.errors.has_key?(:zip_code) %>
+            <div class="error-message">
+              <%= @user_address.errors[:zip_code].first %>
+            </div>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= address_form.label :phone_number, "Телефонний номер" %>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">+38</span>
+            </div>
+            <%= address_form.text_field :phone_number, placeholder: "0971975388",
+                                        class: "form-control", maxlength: 10, id: "phone-number-input" %>
+          </div>
+          <% if @user_address.errors.has_key?(:phone_number) %>
+            <div class="error-message">
+              <%= @user_address.errors[:phone_number].first %>
+            </div>
+          <% end %>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var phoneNumberInput = document.getElementById('phone-number-input');
+                phoneNumberInput.addEventListener('input', formatPhoneNumber);
+
+                function formatPhoneNumber() {
+                    var phoneNumber = phoneNumberInput.value.replace(/\D/g, '');
+                    var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4');
+                    phoneNumberInput.value = formattedPhoneNumber;
+                }
+            });
+        </script>
+      <% end %>
+    </div><br><br>
+
+    <div class="payment-section">
+      <h2>2) Оплата</h2>
+      <%= fields_for @user_payment do |payment_form| %>
+        <div class="form-group">
+          <%= payment_form.label :payment_type, "Тип(карта/накладений платіж)" %>
+          <%= payment_form.select :payment_type, ['Карта', 'Накладений платіж'], {}, class: "form-control", id: "payment-type-select" %>
+        </div>
+        <div class="form-group">
+          <%= payment_form.label :provider, "Доставка" %>
+          <%= payment_form.select :provider,
+                                  ['Доставка кур’єром до ваших дверей',
+                                   'Доставка до відділень «Укрпошта»',
+                                   'Доставка до відділень «Нова пошта»',
+                                   'Доставка до поштоматів «Нова пошта»',
+                                   'Самовивіз'], {}, class: "form-control", id: "payment-type-select" %>
+        </div>
+
+
+
+        <div class="form-group">
+          <%= payment_form.label :account_number, "Номер рахунку (IBAN)" %>
+          <%= payment_form.text_field :account_number, class: "form-control",
+                                      maxlength: 36, id: "iban-input", placeholder: "UA50 8648 7224 7166 6927 9229 321 24" %>
+          <% if @user_payment.errors.has_key?(:expiry) %>
+            <div class="error-message">
+              <%= @user_payment.errors[:expiry].first %>
+            </div>
+          <% end %>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var ibanInput = document.getElementById("iban-input");
+
+                ibanInput.addEventListener("input", function() {
+                    var input = ibanInput.value;
+                    var formattedInput = input.replace(/\s/g, "").replace(/(.{4})(?=.{2,}$)/g, "$1 ");
+                    ibanInput.value = formattedInput;
+                });
+            });
+        </script>
+
+
+
+
+        <div class="form-group" id="expiry-field">
+          <%= payment_form.label :expiry, "Термін дії" %>
+          <% if payment_form.object.payment_type == "Накладений платіж" %>
+            <%= payment_form.hidden_field :expiry %>
+          <% else %>
+            <%= payment_form.text_field :expiry, class: "form-control", placeholder: "ММ/РР", maxlength: 5 , id: "expiry-input" %>
+            <% if @user_payment.errors.has_key?(:expiry) %>
+              <div class="error-message">
+                <%= @user_payment.errors[:expiry].first %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <script>
+            const expiryInput = document.getElementById('expiry-input');
+            const paymentTypeSelect = document.getElementById('payment-type-select');
+
+            function toggleExpiryField() {
+                if (paymentTypeSelect.value === "Накладений платіж") {
+                    expiryInput.disabled = true;
+                    expiryInput.value = "";
+                } else {
+                    expiryInput.disabled = false;
+                }
+            }
+
+            function formatExpiryDate(event) {
+                const input = event.target.value;
+                const formattedInput = input.replace(/(\d{2})(\d{1,2})/, "$1/$2");
+                expiryInput.value = formattedInput;
+            }
+
+            expiryInput.addEventListener('input', formatExpiryDate);
+            paymentTypeSelect.addEventListener('change', toggleExpiryField);
+
+            toggleExpiryField();
+        </script>
+      <% end %>
+    </div>
+    <div class="form-group submit-section">
+      <a ><%= f.submit "Підтвердити", class: "btn btn-primary" %></a>
+    </div>
+    </form>
+  <% end %>
+
+</div>
+</body>
+</html>
