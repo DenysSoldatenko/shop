@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = current_user
   end
   def settings; end
+  def my_account; end
   def destroy
     sign_out(current_user)
     redirect_to root_path

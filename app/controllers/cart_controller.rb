@@ -44,6 +44,7 @@ class CartController < ApplicationController
         @products << temp unless @products.include?(temp)
       end
     end
+    session[:total] = @total
   end
 
 

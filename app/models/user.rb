@@ -7,6 +7,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :wishlist_products
+  has_many :user_address
+  has_many :user_payment
 
   validates :name, :surname, :patronymic, presence: true
   validate :validate_name_format
