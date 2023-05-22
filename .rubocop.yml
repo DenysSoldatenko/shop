@@ -1,0 +1,16 @@
+# AllCops settings
+require: rubocop-rails
+AllCops:
+  TargetRubyVersion: 2.7.0
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'app/services/*'
+    - 'app/models/*'
+
+# Rails settings
+Rails:
+  Enabled: true

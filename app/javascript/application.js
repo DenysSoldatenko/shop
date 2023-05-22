@@ -5,4 +5,3 @@ import "controllers"
 //= require popper
 //= require bootstrap-sprockets
 //= require bootstrap
-
