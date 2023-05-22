@@ -22,6 +22,6 @@ class ProductFilter
     when 'rating_desc'
       products = products.sort_by(&:get_rating).reverse
     end
-    products
+    Kaminari.paginate_array(products).page(params[:page]).per(16)
   end
 end
