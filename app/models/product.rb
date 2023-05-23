@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   has_many :characteristics, class_name: 'Attribute', through: :attributes_products
   has_many :carts_products
   has_many :carts, through: :carts_products
-
+  has_one_attached :photo
   def get_rating
     ratings = Review.where(product_id: id).map(&:rating)
     return (ratings.sum / ratings.length).round unless ratings.empty?

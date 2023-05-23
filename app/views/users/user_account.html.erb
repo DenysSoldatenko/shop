@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Профіль</title>
+  <style>
+      .center {
+          text-align: center;
+      }
+      .link {
+          display: block;
+          margin-bottom: 18px;
+          color: #0000FF;
+          text-decoration: none;
+          font-size: 20px;
+      }
+
+      .home-link {
+          color: #FF0000;
+          font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+<%= render "shared/navbar" %><br>
+<h2 class="center">Профіль</h2><br>
+<% if user_signed_in? %>
+  <a href="<%= account_path_url %>" class="link center">Мій профіль</a>
+  <a href="<%= settings_path_url %>" class="link center">Налаштування</a>
+  <a href="<%= logout_path %>" class="link center">Вийти</a>
+<% else %>
+  <a href="<%= new_user_session_path %>" class="link center">Увійти</a>
+  <a href="<%= new_user_registration_path %>" class="link center">Зареєструватися</a>
+<% end %>
+<a href="<%= root_path %>" class="link center home-link">До головної сторінки</a>
+</body>
+</html>

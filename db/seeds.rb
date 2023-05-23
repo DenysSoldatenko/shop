@@ -1,6 +1,6 @@
 # Додавання 30 продуктів
 
- 
+
 kastruly_p = Product.create([{ name: "Каструля з кришкою 'Майстерня Смаку'",
                                description: 'Ця каструля з нержавіючої сталі має велику місткість і дуже зручна для приготування різних страв.',
                                price: 549.99,
@@ -624,4 +624,171 @@ reviews.each do |prod, data|
   end
   rat += 1
 end
- 
+
+
+# Додавання фото
+
+product_data = [
+  {
+    photo_path: 'db/photos/cooking_pot_with_lid_flavor_workshop.jpeg',
+    photo_filename: 'cooking_pot_with_lid_flavor_workshop.jpeg'
+  },
+  {
+    photo_path: 'db/photos/skillet_skorinka.jpeg',
+    photo_filename: 'skillet_skorinka.jpeg'
+  },
+  {
+    photo_path: 'db/photos/frying_pan_flight.jpeg',
+    photo_filename: 'frying_pan_flight.jpeg'
+  },
+  {
+    photo_path: 'db/photos/grill_pan_tasty_corner.jpeg',
+    photo_filename: 'grill_pan_tasty_corner.jpeg'
+  },
+  {
+    photo_path: 'db/photos/nonstick_frying_pan_easy_cook.jpeg',
+    photo_filename: 'nonstick_frying_pan_easy_cook.jpeg'
+  },
+  {
+    photo_path: 'db/photos/slicing_knife_kulinarny.jpeg',
+    photo_filename: 'slicing_knife_kulinarny.jpeg'
+  },
+  {
+    photo_path: 'db/photos/knife_set_mastery.jpeg',
+    photo_filename: 'knife_set_mastery.jpeg'
+  },
+  {
+    photo_path: 'db/photos/cheese_slicing_knife_cheese_master.jpeg',
+    photo_filename: 'cheese_slicing_knife_cheese_master.jpeg'
+  },
+  {
+    photo_path: 'db/photos/kitchen_knife_set_prochef.jpeg',
+    photo_filename: 'kitchen_knife_set_prochef.jpeg'
+  },
+  {
+    photo_path: 'db/photos/coffee_maker_enchanting_drop.jpeg',
+    photo_filename: 'coffee_maker_enchant.jpeg'
+  },
+
+  {
+    photo_path: 'db/photos/coffee_maker_my_dream.jpeg',
+    photo_filename: 'coffee_maker_my_dream.jpeg'
+  },
+  {
+    photo_path: 'db/photos/electric_kettle_fairy_tale.jpeg',
+    photo_filename: 'electric_kettle_fairy_tale.jpeg'
+  },
+  {
+    photo_path: 'db/photos/strainer_tasty_selection.jpeg',
+    photo_filename: 'strainer_tasty_selection.jpeg'
+  },
+  {
+    photo_path: 'db/photos/kitchen_tool_set_my_cook.jpeg',
+    photo_filename: 'kitchen_tool_set_my_cook.jpeg'
+  },
+  {
+    photo_path: 'db/photos/kitchen_tool_set_elegance.jpeg',
+    photo_filename: 'kitchen_tool_set_elegance.jpeg'
+  },
+  {
+    photo_path: 'db/photos/kitchen_tool_set_everything_for_home.jpeg',
+    photo_filename: 'kitchen_tool_set_everything_for_home.jpeg'
+  },
+  {
+    photo_path: 'db/photos/grater_tasty_idea.jpeg',
+    photo_filename: 'grater_tasty_idea.jpeg'
+  },
+  {
+    photo_path: 'db/photos/mixing_bowl_set_taste_bowl.jpeg',
+    photo_filename: 'mixing_bowl_set_taste_bowl.jpeg'
+  },
+  {
+    photo_path: 'db/photos/food_processor_master_chef.jpeg',
+    photo_filename: 'food_processor_master_chef.jpeg'
+  },
+  {
+    photo_path: 'db/photos/electric_stove_hot_spot.jpeg',
+    photo_filename: 'electric_stove_hot_spot.jpeg'
+  },
+
+
+  {
+    photo_path: 'db/photos/blender_kitchen_magician.jpeg',
+    photo_filename: 'blender_kitchen_magician.jpeg'
+  },
+  {
+    photo_path: 'db/photos/multicooker_multicooker.jpeg',
+    photo_filename: 'multicooker_multicooker.jpeg'
+  },
+  {
+    photo_path: 'db/photos/multicooker_helper.jpeg',
+    photo_filename: 'multicooker_helper.jpeg'
+  },
+  {
+    photo_path: 'db/photos/kitchen_timer_cooking_time.jpeg',
+    photo_filename: 'kitchen_timer_cooking_time.jpeg'
+  },
+  {
+    photo_path: 'db/photos/baking_dish_deliciousness.jpeg',
+    photo_filename: 'baking_dish_deliciousness.jpeg'
+  },
+  {
+    photo_path: 'db/photos/baking_pan_sweet_home.jpeg',
+    photo_filename: 'baking_pan_sweet_home.jpeg'
+  },
+  {
+    photo_path: 'db/photos/baking_dish_set_culinary_fantasy.jpeg',
+    photo_filename: 'baking_dish_set_culinary_fantasy.jpeg'
+  },
+  {
+    photo_path: 'db/photos/baking_dish_your_all.jpeg',
+    photo_filename: 'baking_dish_your_all.jpeg'
+  },
+  {
+    photo_path: 'db/photos/wine_glasses_wine_grove.jpeg',
+    photo_filename: 'wine_glasses_wine_grove.jpeg'
+  },
+  {
+    photo_path: 'db/photos/champagne_flutes_elegance.jpeg',
+    photo_filename: 'champagne_flutes_elegance.jpeg'
+  }
+]
+data = [
+  "Каструля з кришкою 'Майстерня Смаку'",
+  "Каструля-скороварка 'Скоринка'",
+  "Сковорода 'Політ'",
+  "Сковорода-гриль 'Смаковий куток'",
+  "Сковорідка з антипригарним покриттям 'EasyCook'",
+  "Ніж для нарізання 'Кулінар'",
+  "Набір ножів 'Майстерність'",
+  "Ніж для нарізання сиру 'Сирний майстер'",
+  "Набір ножів для кухні 'ProChef'",
+  "Кавоварка 'Чарівна крапля'",
+  "Кавоварка 'Моя мрія'",
+  "Чайник електричний 'Чайна казка'",
+  "Сито 'Смачний відбір'",
+  "Набір кухонних інструментів 'Мій Кухар'",
+  "Набір кухонних інструментів 'Елегантність'",
+  "Набір кухонних інструментів 'Все для дому'",
+  "Терка 'Смачна ідея'",
+  "Набір мисок 'Миска смаку'",
+  "Кухонний комбайн 'Майстер Кухар'",
+  "Плита електрична 'Гаряча точка'",
+  "Блендер 'Кухонний маг'",
+  "Мультиварка 'Мультикухар'",
+  "Мультиварка 'Помічник'",
+  "Кухонний таймер 'Час приготування'",
+  "Форма для запікання 'Смакота'",
+  "Форма для випічки 'Солодкий дім'",
+  "Набір форм для запікання 'Кулінарна фантазія'",
+  "Форма для запікання 'Твоє - все!'",
+  "Келихи для вина 'Винна галявина'",
+  "Келихи для шампанського 'Вишуканість'"
+]
+data.each_with_index do |data_name, index|
+  product = Product.find_by(name: data_name)
+  photo_data = product_data[index]
+
+  product.photo.attach(io: File.open(photo_data[:photo_path]), filename: photo_data[:photo_filename])
+  product.save
+end
