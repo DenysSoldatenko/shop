@@ -21,7 +21,8 @@
     <h1>Кошик</h1>
     <div>
       <% @cart.products.each do |product| %>
-        <%= render 'products/in_cart', product: product, carts_product: @cart.carts_products.find_by_product_id(product.id)%>
+        <%= render 'products/in_cart', product: product,
+                   carts_product: @cart.carts_products.find_by_product_id(product.id)%>
       <% end %>
     </div>
     <div class="d-flex align-items-center">

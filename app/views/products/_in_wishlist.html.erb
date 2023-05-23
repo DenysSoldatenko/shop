@@ -1,6 +1,6 @@
 <div class="row mb-2 w-75 border-bottom pb-2", style="margin: auto">
   <div class="col-4">
-    <%= image_tag "product.jpg", class: "img-fluid"%>
+    <%= image_tag product.photo, style: "width: 250px; height: 150px;", class: "card-img-top img-fluid" if product.photo.attached? %>
   </div>
   <div class="col">
     <h4><%=link_to product.name, product_url(:id => product.id), style: "text-decoration: none"%></h4>
