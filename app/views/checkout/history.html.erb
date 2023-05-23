@@ -51,39 +51,54 @@
 <br><h2 class="center">Мої замовлення</h2><br>
 
 <% i = 0 %>
+<% total = 0 %>
 <% previous_created_at = nil %>
-<div class="purchase-item">
-  <% if @purchases.empty? %>
-    <p>Відсутні покупки</p>
-  <% else %>
-    <% @purchases.each do |purchase| %>
-      <% current_created_at = purchase.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-      <% if previous_created_at && previous_created_at.to_datetime == current_created_at.to_datetime %>
+<% if @purchases.empty? %>
+  <p>Відсутні покупки</p>
+<% else %>
+  <% @purchases.each_with_index do |purchase, index| %>
+    <% current_created_at = purchase.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    <% if previous_created_at && previous_created_at.to_datetime == current_created_at.to_datetime %>
+      <div class="purchase-item">
+        <span class="product-name">Продукт: <%= purchase.product.name %></span>
+        <span class="price">Ціна: <%= purchase.price %> грн</span>
+        <span class="quantity">Кількість: <%= purchase.quantity %>
+          <%= purchase.quantity == 1 ? 'товар' : ('2'..'4').include?(purchase.quantity.to_s[-1]) ?
+                                                   'товари' : 'товарів' %></span>
+        <% total = total + purchase.price*purchase.quantity %>
+      </div>
+      <% if index == @purchases.size - 1 %>
         <div class="purchase-item">
-          <span class="product-name">Продукт: <%= purchase.product.name %></span>
-          <span class="price">Ціна: <%= purchase.price %> грн</span>
-          <span class="quantity">Кількість: <%= purchase.quantity %>
-            <%= purchase.quantity == 1 ? 'товар' : ('2'..'4').include?(purchase.quantity.to_s[-1]) ? 'товари' : 'товарів' %></span>
+          <span class="product-name">Всього: <%= total %></span>
         </div>
-      <% else %>
-        <% previous_created_at = current_created_at %>
-        <% if i > 0 %>
-          </div><br><br>
-        <% end %>
-        <% i += 1 %>
+      <% end %>
+    <% else %>
+      <% previous_created_at = current_created_at %>
+      <% if i > 0 %>
         <div class="purchase-item">
-          <h2>Замовлення <%= i %></h2>
-          <span class="product-name">Продукт: <%= purchase.product.name %></span>
-          <span class="price">Ціна: <%= purchase.price %> грн</span>
-          <span class="quantity">Кількість: <%= purchase.quantity %>
-            <%= purchase.quantity == 1 ? 'товар' : ('2'..'4').include?(purchase.quantity.to_s[-1]) ? 'товари' : 'товарів' %></span>
+          <span class="product-name">Всього: <%= total %></span>
+        </div>
+        <% total = 0 %>
+        </div><br><br>
+      <% end %>
+      <% i += 1 %>
+      <div class="purchase-item">
+        <h2>Замовлення <%= i %></h2>
+        <span class="product-name">Продукт: <%= purchase.product.name %></span>
+        <span class="price">Ціна: <%= purchase.price %> грн</span>
+        <span class="quantity">Кількість: <%= purchase.quantity %>
+          <%= purchase.quantity == 1 ? 'товар' : ('2'..'4').include?(purchase.quantity.to_s[-1]) ?
+                                                   'товари' : 'товарів' %></span>
+        <% total = total + purchase.price*purchase.quantity %>
+      </div>
+      <% if index == @purchases.size - 1 %>
+        <div class="purchase-item">
+          <span class="product-name">Всього: <%= total %></span>
         </div>
       <% end %>
     <% end %>
   <% end %>
-  </div>
-
-
+<% end %><br>
 
 <a href="<%= root_path %>" class="link center home-link">До головної сторінки</a>
 </body>
