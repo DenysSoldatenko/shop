@@ -11,14 +11,19 @@
       <% end %>
     </div>
     <div>
-      <%= link_to(image_tag("user_icon.svg", class: "btn btn-outline-secondary rounded-circle", style: "height:50px;width:50px", id: "user-icon", alt: "User Icon")) %>
-      <%=link_to (image_tag "heart_icon.svg", class: "btn btn-outline-danger rounded-circle", style: "height:50px;width:50px"), wishlist_show_url %>
-      <%=link_to (image_tag "shopping_cart_icon.svg", class: "btn btn-outline-secondary rounded-circle", style: "height:50px;width:50px"), cart_show_url%>
+      <%= javascript_include_tag 'custom' %>
+      <%= link_to(image_tag("user_icon.svg", class: "btn btn-outline-secondary rounded-circle",
+                            style: "height:50px;width:50px", id: "user-icon", alt: "User Icon")) %>
+      <%=link_to (image_tag "heart_icon.svg", class: "btn btn-outline-danger rounded-circle",
+                            style: "height:50px;width:50px"), wishlist_show_url %>
+      <%=link_to (image_tag "shopping_cart_icon.svg", class: "btn btn-outline-secondary rounded-circle",
+                            style: "height:50px;width:50px"), cart_show_url%>
     </div>
   </div>
 </nav>
 
-<div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="user-modal-label" aria-hidden="true">
+<div id="user-modal" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="user-modal-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -78,27 +83,6 @@
         padding: 1rem;
     }
 </style>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var userIcon = document.getElementById("user-icon");
-        var modal = document.getElementById("user-modal");
-        var closeButton = modal.querySelector(".btn-close");
-
-        function toggleModal(event) {
-            event.preventDefault();
-            modal.classList.toggle("show");
-        }
-
-        userIcon.addEventListener("click", toggleModal);
-        closeButton.addEventListener("click", toggleModal);
-
-        modal.addEventListener("click", function(event) {
-            if (event.target === modal) {
-                toggleModal(event);
-            }
-        });
-    });
-</script>
 
 
 

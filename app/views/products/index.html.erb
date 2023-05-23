@@ -5,7 +5,11 @@
 <%= render "shared/navbar", search: @search %>
 <div class="w-100 ps-4 pt-2">
   <%=link_to "Головна", root_path, style: "text-decoration:none;"%>
-  <h2>Результати пошуку</h2>
+  <div class="d-flex justify-content-between">
+    <h2>Результати пошуку</h2>
+    <div class="align-items-center"><%= paginate @products, window: 1, outer_window: 1 %></div>
+  </div>
+
 </div>
 <div class="wrapper d-flex align-items-stretch">
   <nav class="d-flex flex-column border-end border-3" style="width: 20%">
@@ -27,7 +31,6 @@
       </div>
       <%=hidden_field_tag("search", @search) %>
     <%end %>
-
   </nav>
   <div style="width: 80%">
     <%i = 0 %>
@@ -42,6 +45,7 @@
       <%i+=1 %>
     <% end %>
   </div>
+    <div class="d-flex justify-content-center align-items-center mt-2 mb-2"><%= paginate @products, window: 1, outer_window: 1 %></div>
 </div>
 </div>
 

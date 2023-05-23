@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
+# This is the ReviewsController class
 class ReviewsController < ApplicationController
-  before_action :set_review, only: %i[ show edit update destroy ]
+  before_action :set_review, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: :create
 
   # GET /reviews or /reviews.json
   def index
-    @product = Product.find_by_id(params[:product_id])
+    @product = Product.find_by(id: params[:product_id])
     @reviews = Review.where(product_id: params[:product_id])
-    @current_user_review = Review.find_by(user_id: current_user.id) unless current_user == nil
+    @current_user_review = Review.find_by(user_id: current_user.id) unless current_user.nil?
   end
 
   # GET /reviews/1/edit
@@ -37,13 +40,14 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit(:user_id, :product_id, :rating, :comment)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def review_params
+    params.require(:review).permit(:user_id, :product_id, :rating, :comment)
+  end
 end
