@@ -73,10 +73,12 @@
       <p style="font-size: 20px;"><%=@product.description%></p>
     </div>
   </div>
-  <div class="row mt-2" style="margin: auto;">
+  <div class="row mt-2" style="display: flex; justify-content: center; margin: auto;">
     <h3>Вас можуть зацікавити</h3>
-    <%@products.each do |product|%>
-      <%=render 'products/product', product: product %>
+    <% @products.each do |product| %>
+      <div class="product-card" style="height: 250px; width: 300px;">
+        <%= render 'products/product', product: product %>
+      </div>
     <% end %>
   </div>
 </div>

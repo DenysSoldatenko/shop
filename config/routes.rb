@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy'
   end
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'custom_registration' }
 
   root 'application#index'
 end

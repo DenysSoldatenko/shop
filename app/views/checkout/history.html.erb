@@ -54,7 +54,9 @@
 <% total = 0 %>
 <% previous_created_at = nil %>
 <% if @purchases.empty? %>
-  <p>Відсутні покупки</p>
+  <div class="purchase-item" style="display: flex; justify-content: center; align-items: center;">
+    <span style="font-size: 24px; font-weight: bold;">Відсутні покупки</span>
+  </div>
 <% else %>
   <% @purchases.each_with_index do |purchase, index| %>
     <% current_created_at = purchase.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
