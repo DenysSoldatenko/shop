@@ -20,7 +20,7 @@ class UserPayment < ApplicationRecord
 
   def valid_iban?(iban)
     stripped_iban = iban.gsub(/\s+/, "")
-    iban_regex = /\A[A-Z]{2}\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{2}\z/
+    iban_regex = /\AUA\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{2}\z/
     stripped_iban.match?(iban_regex)
   end
 

@@ -21,7 +21,6 @@ gem 'rubocop'
 gem 'rubocop-rails'
 gem 'bootstrap'
 gem 'jquery-rails'
-gem 'faker'
 gem 'kaminari'
 
 # Use the Puma web server [https://github.com/puma/puma]
