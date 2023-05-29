@@ -69,11 +69,8 @@
         <div class="form-group">
           <%= address_form.label :phone_number, "Телефонний номер" %>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">+38</span>
-            </div>
-            <%= address_form.text_field :phone_number, placeholder: "0971975388",
-                                        class: "form-control", maxlength: 10, id: "phone-number-input" %>
+            <%= address_form.text_field :phone_number, placeholder: "+380 97 197 5388",
+                                        class: "form-control", maxlength: 16, id: "phone-number-input" %>
           </div>
           <% if @user_address.errors.has_key?(:phone_number) %>
             <div class="error-message">
@@ -81,19 +78,6 @@
             </div>
           <% end %>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var phoneNumberInput = document.getElementById('phone-number-input');
-                phoneNumberInput.addEventListener('input', formatPhoneNumber);
-
-                function formatPhoneNumber() {
-                    var phoneNumber = phoneNumberInput.value.replace(/\D/g, '');
-                    var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4');
-                    phoneNumberInput.value = formattedPhoneNumber;
-                }
-            });
-        </script>
       <% end %>
     </div><br><br>
 
@@ -114,8 +98,6 @@
                                    'Самовивіз'], {}, class: "form-control", id: "payment-type-select" %>
         </div>
 
-
-
         <div class="form-group">
           <%= payment_form.label :account_number, "Номер рахунку (IBAN)" %>
           <%= payment_form.text_field :account_number, class: "form-control",
@@ -126,20 +108,6 @@
             </div>
           <% end %>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var ibanInput = document.getElementById("iban-input");
-
-                ibanInput.addEventListener("input", function() {
-                    var input = ibanInput.value;
-                    var formattedInput = input.replace(/\s/g, "").replace(/(.{4})(?=.{2,}$)/g, "$1 ");
-                    ibanInput.value = formattedInput;
-                });
-            });
-        </script>
-
-
-
 
         <div class="form-group" id="expiry-field">
           <%= payment_form.label :expiry, "Термін дії" %>

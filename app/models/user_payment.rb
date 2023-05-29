@@ -25,14 +25,12 @@ class UserPayment < ApplicationRecord
   end
 
   def validate_account_number_format
-    return unless account_number.present? && valid_iban?(account_number)
-
-    errors.add(:account_number, 'Неправильний формат IBAN')
+    errors.add(:account_number, 'Неправильний формат IBAN') if account_number.present? && !valid_iban?(account_number)
   end
 
   def valid_iban?(iban)
     stripped_iban = iban.gsub(/\s+/, '')
-    iban_regex = /\AUA\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{2}\z/
+    iban_regex = /\bUA\s?\d{2}\s?\d{6}\s?\d{19}\b/
     stripped_iban.match?(iban_regex)
   end
 

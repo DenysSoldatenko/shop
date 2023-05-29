@@ -50,8 +50,8 @@ class UserAddress < ApplicationRecord
   end
 
   def validate_phone_number_format
-    return unless phone_number.present? && (phone_number.gsub(/\s/, '') !~ /^\d{10}$/)
+    return unless phone_number.present? && (!phone_number.match?(/(?=.*\+[0-9]{3}\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{4,5}$)/))
 
-    errors.add(:phone_number, 'Телефонний номер повинен містити рівно та тільки 10 цифр')
+    errors.add(:phone_number, 'Телефонний номер має бути записаний у правильному форматі')
   end
 end
