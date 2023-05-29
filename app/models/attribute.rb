@@ -3,4 +3,6 @@
 # This is the Attribute class
 class Attribute < ApplicationRecord
   has_many :products, through: :attributes_products
+
+  validates :name, presence: true
 end

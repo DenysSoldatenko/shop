@@ -8,8 +8,6 @@ AllCops:
     - 'config/**/*'
     - 'db/**/*'
     - 'bin/**/*'
-    - 'app/services/*'
-    - 'app/models/*'
 
 # Rails settings
 Rails:

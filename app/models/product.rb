@@ -8,6 +8,11 @@ class Product < ApplicationRecord
   has_many :carts_products
   has_many :carts, through: :carts_products
   has_one_attached :photo
+
+  validates :name, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0, only_integer: true }
+
   def get_rating
     ratings = Review.where(product_id: id).map(&:rating)
     return (ratings.sum / ratings.length).round unless ratings.empty?

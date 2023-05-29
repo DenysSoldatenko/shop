@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :wishlist_products
   has_many :user_address
   has_many :user_payment
-  attr_accessor :name, :surname, :patronymic
 
   validates :name, :surname, :patronymic, :email, presence: true
   validate :validate_name_format
