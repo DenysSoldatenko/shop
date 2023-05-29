@@ -8,8 +8,8 @@ class DiscountTest < ActiveSupport::TestCase
     @discount = Discount.new(
       product: @product,
       percent: 10.0,
-      start_date: Date.today,
-      end_date: Date.today + 7.days
+      start_date: Time.zone.today,
+      end_date: Time.zone.today + 7.days
     )
   end
 

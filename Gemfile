@@ -15,13 +15,13 @@ gem 'sprockets-rails'
 gem 'mysql2', '~> 0.5'
 
 # Gems for project
+gem 'bootstrap'
 gem 'devise'
 gem 'faker'
-gem 'rubocop'
-gem 'rubocop-rails'
-gem 'bootstrap'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'rubocop'
+gem 'rubocop-rails'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
@@ -78,6 +78,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end

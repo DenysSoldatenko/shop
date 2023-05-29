@@ -72,6 +72,12 @@ en:
         name: "Ім'я: "
         surname: "Прізвище: "
         patronymic: "По-батькові: "
+      user_payment/payment_type:
+        blank: "Поле не може бути порожнім"
+        user_payment/provider:
+          blank: "Поле не може бути порожнім"
+        user_payment/account_number:
+          blank: "Поле не може бути порожнім"
     errors:
       models:
         user:

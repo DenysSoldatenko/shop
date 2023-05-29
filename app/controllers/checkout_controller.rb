@@ -12,7 +12,6 @@ class CheckoutController < ApplicationController
   def history
     @user = current_user
     @purchases = Purchase.where(user_id: current_user.id)
-
   end
 
   def success

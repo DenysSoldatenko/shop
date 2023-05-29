@@ -4,5 +4,5 @@
 class Attribute < ApplicationRecord
   has_many :products, through: :attributes_products
 
-  validates_presence_of :name
+  validates :name, presence: true
 end

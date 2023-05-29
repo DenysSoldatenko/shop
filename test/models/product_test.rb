@@ -32,7 +32,7 @@ class ProductTest < ActiveSupport::TestCase
     product = Product.new(
       name: 'Product 1',
       price: 10.0,
-      quantity: "5.5"
+      quantity: '5.5'
     )
     assert_not product.valid?
   end

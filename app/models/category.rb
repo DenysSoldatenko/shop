@@ -6,7 +6,7 @@ class Category < ApplicationRecord
   has_many :children, class_name: 'Category', foreign_key: 'parent_id', dependent: :destroy
   has_and_belongs_to_many :products
 
-  validates_presence_of :name
+  validates :name, presence: true
   def descendants
     children | children.map(&:descendants).flatten
   end
